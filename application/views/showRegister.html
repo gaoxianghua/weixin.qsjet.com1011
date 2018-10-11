@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="<?php echo base_url();?>" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" />
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Expires" CONTENT="0"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta http-equiv="x-rim-auto-match" content="none" /> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>会员注册</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/alert.js"></script>
+	<script type="text/javascript" src="js/loading.js"></script>
+<style>
+	p{float:left;padding:3% 0 3% 2.2%;width:12.5%;text-align:left}
+	.sex,.callous{width:81.5%;border:none;padding-top: 3%;margin-bottom: -2%;vertical-align: middle;}
+	.is_insulin{width:81.5%;border:none;padding-top: 5%;margin-bottom: -2%;vertical-align: middle;}
+	.callous i,.sex i{display: inline-block;height:20px;vertical-align: middle;}
+	.bingshi{background: url(img/images/up.png) no-repeat 97%;background-size:6%}
+	.nan,.nv,.yes,.no,.is_yes,.is_no{background: url(img/images/radiono.png) no-repeat;background-size: contain;margin-left: 5%;color: #333;padding: 0 0% 0 6%;}
+	.sex .change,.callous .change,.is_insulin .change{background: url(img/images/radioyes.png)no-repeat;background-size: contain;}
+	.selected .span-radio{background: url(img/images/radiono.png) no-repeat 97% center;background-size: 5%;}
+	.selected .choose{background:#4E4E4E url(img/images/radioyes.png)no-repeat 97% center;background-size: 5%;}
+	input[type=text]{padding:3.6% 0 2.3% 3%;}
+	.bottom{text-align: center;}
+	#popDiv1{background:#595959;width: 80%;top: 20%;}
+	.span_hidden{display:none;color:#f00;}
+	p{float:left;padding:3% 0 2.2% 2.2%;width:17.5%;text-align:left}
+	input[type=text]{padding:3% 0% 2.4% 3%;width:80%;}
+	input[type=password]{padding:3% 0% 2.4% 3%;width:80%;}
+	.span_hidden{display:none;}
+	.yzm_btn{border: none;outline: none; border-radius: 4px;background:#1480D1;color: #fff;height: 25px;width:25%;margin:1.5%;line-height: 5px;font-size: 1rem}
+	#popDiv,#popDiv1{background:#595959;width: 80%;top: 20%;}
+		</style>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+	<div id="container">
+		<div class="middle">
+			<ul>
+				<li class="li_first"><p>姓名</p><input type="text" class="username" maxlength="15" placeholder="请输入您的姓名" onfocus='span_hidden()' ><br></li>
+				<span id="span_username" class='span_hidden'><font size='1'>您输入的姓名有误！</font></span>
+				<li><p>性别</p><div class="sex"><i class="nan" ></i>&nbsp;&nbsp;男<i class="nv"></i>&nbsp;&nbsp;女</div><br></li>
+				<span id="span_sex" class='span_hidden' onfocus='span_hidden()' ><font size='1'>您的性别选择有误！</font></span>
+				<li><p>手机号码</p><input type="text" class="account" name="account" placeholder="请输入您的手机号码" maxlength=11 onfocus='span_hidden()' /><br></li>
+				<span id="span_account" class='span_hidden'><font color='red' size='1'>手机号码输入有误！</font></span>
+				<li><p>密码</p><input type="password" maxlength=15 class="pw" placeholder="请输入您的密码" onfocus='span_hidden()' /><br></li>
+				<span id="span_pw" class='span_hidden'><font color='red' size='1'>密码为6~15位,由数字、字母、下划线组成！</font></span>
+				<li><p>确认密码</p><input type="password" maxlength=15  class="pd" placeholder="请输入您的确认密码" onfocus='span_hidden()' /><br></li>
+				<span id="span_pd" class='span_hidden'><font color='red' size='1'>两次密码输入不一致！</font></span>
+				<li>
+					<p>验证码</p>
+					<input type="text"  style="width: 45%;" id="verify" name="verify" maxlength="4"  autocomplete="off" placeholder="请您输入右侧图像验证码"  onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" />
+					<a href="javascript:reloadCode();" style="display: inline-block;margin-top: 2%;">
+						<img src="<?php echo base_url('captcha_code/verify_image');?>" name="checkCodeImg" id="checkCodeImg" border="0" />
+					</a><br>
+				</li>
+				<li ><p>短信验证码</p><input type="text" style="width: 50%" maxlength=4  class="code" placeholder="请输入您的短信验证码" onfocus='span_hidden()' /><input type="button" onclick="" value='获取验证码' class="yzm_btn btn-bd" style="display:inline-block;margin-top: 4%;" /><br></li>
+				<span id="span_code" class='span_hidden'><font color='red' size='1'>短信验证码输入有误！</font></span>
+				<li class="li_last"></li>
+			</ul>	
+			</form>
+		</div>
+		<div class="bottom">
+			<?php
+				if(isset($redirect_url)&&$redirect_url=='register_project'){
+			?>
+					<input type="button" value="提交并注册产品" class="btn-bd btn-tj">	
+			<?php		
+				}else{
+			?>
+					<input type="button" value="提交" class="btn-bd btn-tj">	
+			<?php		
+				}
+			?>
+			
+		</div>
+	</div>
+	<div id="bg" class="bg" style="display:none;"></div>
+	<div id="popDiv1" class="mydiv1" style="display:none;">
+		<div class="selected bingshisele">
+			<span class="span-radio">1-3年</span>
+			<span class="span-radio">3-5年</span>
+			<span class="span-radio">5年以上</span>
+		</div>
+	</div>
+</body>
+</html>
+<script>
+var open_id = "<?php echo isset($open_id)?'open_id='.$open_id:'';?>";
+$(function(){
+	$('.is_yes').addClass("change");
+	var gendersStorage = window.localStorage.getItem("gender");
+
+if(gendersStorage=='男'){
+	$(".nan").addClass("change");
+}else if(gendersStorage=='女'){
+	$(".nv").addClass("change");
+}
+
+});
+
+$('.address').click(function(){
+	$('.span_hidden').hide();
+	var gender,callous;
+	if($(".nan").hasClass("change")){
+		gender="男";
+	}else if($(".nv").hasClass("change")){
+		gender="女";
+	}
+	
+	if($(".yes").hasClass("change")){
+		callous="1";
+	}else if($(".no").hasClass("change")){
+		callous="0";
+	}
+	if($(".is_yes").hasClass("change")){
+		is_insulin="是";
+	}else if($(".is_no").hasClass("change")){
+		is_insulin="否";
+	}
+//	window.localStorage.setItem("is_insulin",is_insulin);
+	window.localStorage.setItem("gender",gender);
+//	window.localStorage.setItem("callous",callous);
+	if(open_id!=''){
+		location.href="<?php echo base_url('areas/showAreasSelect?');?>"+open_id;
+	}else{
+		location.href="<?php echo base_url('areas/showAreasSelect');?>";
+	}
+})
+function showdiv1(){
+    document.getElementById('popDiv1').style.display='block';
+    document.getElementById('bg').style.display='block';
+}
+function closediv(){
+    document.getElementById('bg').style.display='none';
+    document.getElementById('popDiv1').style.display='none';
+}
+function reloadCode(){
+    var dom = document.getElementById("checkCodeImg");
+    dom.src = "<?php echo base_url('captcha_code/verify_image?str=');?>" + Math.random();
+}
+
+//选择性别
+$(".sex i").click(function(){
+	$('.span_hidden').hide();
+	$(".span_sex").hide();
+	$(".sex i").each(function(){
+	if($(this).hasClass("change")) {
+		$(this).removeClass("change");
+		}
+	 	});
+	$(this).addClass("change");
+});	
+
+var countdown=60; 
+function settime(obj) { 
+    if (countdown == 0) { 
+        obj.removeAttribute("disabled");    
+        obj.value="获取验证码"; 
+        countdown = 60; 
+        return;
+    } else { 
+        obj.setAttribute("disabled", true); 
+        obj.value="重新发送(" + countdown + ")"; 
+        countdown--; 
+    } 
+	t=setTimeout(function(){ settime(obj)},1000)
+}
+$(".yzm_btn").click(function() {
+	loading();
+	var account=$(".account").val();
+	var REG_MOBILE = /^13[0-9]{1}[0-9]{8}$|15[0-9]{1}[0-9]{8}$|18[0-9]{9}|14[0-9]{1}[0-9]{8}|17[0-9]{1}[0-9]{8}$/;
+	if(!REG_MOBILE.test(account)){
+		$('#span_account').show();
+		return false;
+	}
+	settime(this);
+	window.localStorage.clear("gender");
+	showload();
+	if(open_id!=''){
+        var verify=$("#verify").val();
+		var commit_url ="<?php echo base_url('login/registerSendCodes?'); ?>"+open_id;
+	}else{
+        var verify=$("#verify").val();
+		var commit_url ="<?php echo base_url('login/registerSendCodes');?>";
+	}
+	$.ajax({  
+		url:commit_url, 
+			data:{account:account,verify:verify},
+			type:'get',  
+			cache:false,  
+			dataType:'json',  
+			success:function(data){
+				closeload();
+				if( data.result_code == '200' ){
+					showPopUpDiv();
+					getAlert({
+					    text:data.info,  
+					    alert:0	     	 
+					})
+					return false;
+				}
+				if( data.result_code == '400' ){
+					clearTimeout(t);
+					$(".yzm_btn").removeAttr("disabled");
+					countdown=60;
+					 $(".yzm_btn").val("获取验证码");
+					showPopUpDiv();
+					getAlert({
+					    text:data.error_msg,  
+					    alert:0	     	
+					})
+					return false;
+				}
+	 		}, 
+	    	error : function() {  
+	    		closeload();
+	 		}  
+		});	
+});
+$(".btn-tj").click(function(){
+	loading();
+	//正则
+	var REG_MOBILE = /^13[0-9]{1}[0-9]{8}$|15[0-9]{1}[0-9]{8}$|18[0-9]{9}|14[0-9]{1}[0-9]{8}|17[0-9]{1}[0-9]{8}$/;
+	var REG_PASSWORD = /^[\u4e00-\u9fa5a-zA-Z0-9_\.\s\·]{6,15}$/;
+	var REG_CODE = /^\d{4}$/;
+	var REG_NAMES = /^[\u4e00-\u9fa5a-zA-Z0-9_\.\s\·]{1,15}$/ ;
+	var REG_GENDER = /^[男女]/;
+	var REG_CALLOUS = /^[10]/;
+	var REG_AGE = /^[0-9\.]{1,5}$/;
+	//获取表单值
+	var account=$(".account").val();
+	var pw=$(".pw").val();
+	var pd=$(".pd").val();
+	var code=$(".code").val();
+	var username=$(".username").val();
+	var gender;
+
+	//用户名
+	if(!REG_NAMES.test(username)){
+		$('#span_username').show();
+		return false;
+	}
+	//账号
+	if(!REG_MOBILE.test(account)){
+		$('#span_account').show();
+		return false;
+	}
+	//密码
+	if(!REG_PASSWORD.test(pw)){
+		$('#span_pw').show();
+		return false;
+	}
+	//密码
+	if(pw != pd){
+		$('#span_pd').show();
+		return false;
+	}
+	//验证码
+	if(!REG_CODE.test(code)){
+		$('#span_code').show();
+		return false;
+	}
+	//性别
+	if( $('.nan').hasClass('change') ){
+		gender = '男';
+	}
+	if( $('.nv').hasClass('change') ){
+		gender = '女';
+	}
+	
+	if(!REG_GENDER.test(gender)){ 
+		$('#span_sex').show();
+		return false;
+	}
+
+	//验证用户名
+	if(!REG_NAMES.test(username.trim())){ 
+		$('#span_username').show();
+		return false;
+	}	
+	
+	if(open_id!=''){
+		var doRegisterUrl ="<?php echo base_url('login/doRegister?redirect_url='.$redirect_url.'&'); ?>"+open_id;
+	}else{
+		var doRegisterUrl ="<?php echo base_url('login/doRegister?redirect_url='.$redirect_url); ?>";
+	}
+	showload();
+	$.ajax({  
+		url:doRegisterUrl, 
+			data:{  
+					account:account,
+					password:pd,
+					code:code,
+					username:username,
+					gender:gender,
+	 	  		},  
+			type:'post',  
+			cache:false,  
+			dataType:'json',  
+			success:function(data){
+				closeload();
+				//一般注册成功
+				if( data.result_code == '200' ){
+					showPopUpDiv();
+					getAlert({
+					    text:data.info,  
+					    alert:1	     	 
+					},"<?php echo base_url('user?token='); ?>"+data.token+'&redirect_url='+data.url)
+					return false;
+				}
+				//从其他页面进入的注册页
+				if( data.result_code == '300' ){
+					showPopUpDiv();
+					getAlert({
+					    text:data.info,  //文本可修改，可加参数
+					    alert:1	     	  //参数可修改 0,1,2
+					},data.url+'?token='+data.token)
+					return false;
+				}
+				//注册失败
+				if( data.result_code == '400' ){
+					$(".yzm_btn").removeAttr("disabled");
+					countdown=60;
+					 $(".yzm_btn").val("获取验证码");
+					showPopUpDiv();
+					getAlert({
+					    text:data.error_msg,  //文本可修改，可加参数
+					    alert:0	     	  //参数可修改 0,1,2
+					})
+					return false;
+				}
+	 		}, 
+	    	error : function() {  
+	    		closeload();
+	    		showPopUpDiv();
+     			getAlert({
+     				text:"请检查网络是否畅通",  
+     				alert:0	    	  
+     			});
+	 		}  
+		});	
+})
+
+function span_hidden(){
+	$('.span_hidden').hide();
+}
+
+</script>

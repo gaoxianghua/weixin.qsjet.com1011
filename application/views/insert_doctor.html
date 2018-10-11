@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="<?php echo base_url();?>" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" /> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta http-equiv="x-rim-auto-match" content="none" /> 
+  	<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Expires" CONTENT="0"> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>来源绑定</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/loading.js"></script>
+	<style>
+.span_hidden{display:none;}
+.top{text-align:center;padding:10% 0;width:100%}
+p{float:left;padding:3% 0 2% 3%;width:15%;text-align:left;background:#fff}
+.middle input[type=text]{font-size:1rem;float:left;padding:3% 3% 2% 0;width:81%;border:none;margin-left: 1%;}
+.zhicheng{background:#fff url(img/images/up.png) no-repeat 97%;background-size:5%;}
+#popDiv{background:#595959;width: 80%;top: 30%;}
+.span-radio{background: url(img/images/radiono.png) no-repeat 97% center;background-size: 5%;}
+.choose{background:#4E4E4E url(img/images/radioyes.png)no-repeat 97% center;background-size: 5%;}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div class="top"><img src="img/images/logo.png" alt="快舒尔" /></div>
+		<div class="middle">
+			<div id="bg" class="bg" style="display:none;"></div>
+			<div id="popDiv" class="mydiv" style="display:none;">
+				<div class="selected">
+					<span class="span-radio">医师</span>
+					<span class="span-radio">主管医师</span>
+					<span class="span-radio">副主任医师</span>
+					<span class="span-radio">主任医师</span>
+				</div>
+			</div>
+		<ul>
+			<li class="li_first"><p>二维码</p><input type="text"  class="erweima" placeholder="请输入二维码"  value="<?php echo $qc_code;?>"  readonly onfocus='span_hidden()' ><br></li>
+			<span id="span_erweima" class='span_hidden'><font color='red' size='1'>二维码信息有误！</font></span>
+			<li><p>姓名</p><input type="text" class="username" maxlength='15' placeholder="请输入姓名,2-15位中英文数字下划线" onfocus='span_hidden()'><br></li>
+			<span id="span_username" class='span_hidden'><font color='red' size='1'>姓名输入有误！</font></span>
+			<li><p>职称</p><input type="text" readonly="true" maxlength='15' class="zhicheng" placeholder="请选择职称" onfocus='span_hidden()' /><br></li>
+			<span id="span_zhicheng" class='span_hidden'><font color='red' size='1'>职称选择有误！</font></span>
+			<li><p>科室</p><input type="text" class="keshi" maxlength='15' placeholder="请输入科室,2-15位中英文数字下划线" onfocus='span_hidden()' ><br></li>
+			<span id="span_keshi" class='span_hidden'><font color='red' size='1'>科室输入有误！</font></span>
+			<li><p>医院</p><input type="text" class="hospital" maxlength='15' placeholder="请输入医院,2-15位中英文数字下划线" onfocus='span_hidden()' ><br></li>
+			<span id="span_hospital" class='span_hidden'><font color='red' size='1'>医院输入有误！</font></span>
+			<li class="li_last"><p>验证码</p><input type="password" maxlength='15' class="yzm" placeholder="请输入验证码,6-15位英文数字下划线" onfocus='span_hidden()' ></li>
+			<span id="span_yzm" class='span_hidden'><font color='red' size='1'>验证码输入有误！</font></span>
+		</ul>	
+		</div>
+		<input type="button" value="绑定医生" class="btn-bd">
+	</div>
+</body>
+</html>
+	<script type="text/javascript">
+
+        function showdiv(){
+            document.getElementById('popDiv').style.display='block';
+            document.getElementById('bg').style.display='block';
+        }
+        function closediv(){
+            document.getElementById('bg').style.display='none';
+            document.getElementById('popDiv').style.display='none';
+        }
+		$(function(){
+				
+			$("body").append('<div id="background" class="background" style="display:none;"></div><div id="loadingdiv" class="loadingdiv" style="display:none;"><img src="img/images/loading.gif"></div>');
+
+			$(".zhicheng").click(function(){
+				showdiv();
+				$(".selected").show();
+				$(".zhicheng").css("background-image","url(img/images/down.png)");
+			});
+			$(".selected span").click(function(){
+    			clear();
+    			$(this).addClass("choose");
+    			$(".zhicheng").val($(this).html());
+ 			});
+ 			
+ 			$(".btn-bd").click(function(){
+ 				var qc_code_name = $('.erweima').val();
+ 				var username = $('.username').val();
+ 				var position = $('.zhicheng').val();
+ 				var department = $('.keshi').val();
+ 				var hospital = $('.hospital').val();
+ 				var code = $('.yzm').val();
+ 				
+ 				var REG_NAMES = /^[\u4e00-\u9fa5a-zA-Z0-9_\s\·]{2,15}$/;
+ 				var REG_CODE = /^[a-zA-Z0-9_]{6,15}$/;
+ 				
+ 				if(qc_code_name == ''){ 
+ 					$('#span_erweima').show();
+ 					return false;
+ 				}	
+ 				if(!REG_NAMES.test(username)){ 
+ 					$('#span_username').show();
+ 					return false;
+ 				}
+ 				if(!REG_NAMES.test(position)){ 
+ 					$('#span_zhicheng').show();
+ 					return false;
+ 				}
+ 				if(!REG_NAMES.test(department)){ 
+ 					$('#span_keshi').show();
+ 					return false;
+ 				}
+ 				if(!REG_NAMES.test(hospital)){ 
+ 					$('#span_hospital').show();
+ 					return false;
+ 				}
+ 				if(!REG_CODE.test(code)){ 
+ 					$('#span_yzm').show();
+ 					return false;
+ 				}
+ 				showload();
+				$.ajax({  
+     		 		url:"<?php echo base_url('doctor/insert?qc_code='.$qc_code)?>", 
+      				data:{
+      					'qc_code_name':qc_code_name,
+      					'doctor_name':username,
+      					'position':position,
+      					'department':department,
+      					'hospital':hospital,
+      					'code':code,
+      				},  
+     				type:'post',  
+     				cache:false,  
+     				dataType:'json',  
+     				success:function(data){
+     					closeload();
+     					if(data.result_code==200){
+     						window.location="<?php echo base_url('doctor/showSuccess?qc_code='.$qc_code);?>";
+     					}
+     					if(data.result_code==400){
+     						window.location="<?php echo base_url('doctor/showFaild?qc_code='.$qc_code.'&status=');?>"+data.error_msg;
+     					}
+     					
+     		 		}, 
+      		    	error : function(data) {  
+      		    		closeload();
+          				window.location="<?php echo base_url('doctor/showFaild?qc_code='.$qc_code);?>";
+      		 		}  
+ 				});	
+			});
+			
+		});
+
+			function clear() {
+   	 			$(".selected span").each(function() {
+        		if ($(this).hasClass("choose")) {
+            		$(this).removeClass("choose");
+       			 }
+        		$(".zhicheng").css("background-image","url(img/images/up.png)");
+				closediv();
+   			 	});
+			}
+			
+			function span_hidden(){
+				$('.span_hidden').hide();
+			}
+	</script>
+
+
+
+
+
+
+
+
+
+

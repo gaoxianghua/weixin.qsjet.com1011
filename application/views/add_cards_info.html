@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="<?php echo base_url();?>" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" />
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Expires" CONTENT="0"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta http-equiv="x-rim-auto-match" content="none" /> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>21天卡</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.btn-bd').click(function(){
+				window.location="days_card/showInsertCards?open_id=<?php echo $open_id;?>";
+			})
+		})
+	</script>
+	</head>
+	<body>
+		<div id="container">
+			<div class="submit">
+				<img src="img/images/prompt.png" alt="提交失败" />
+				<p style="font-size: 16px;color: #808080;">目前没有21天卡的记录</p>
+				<input type="button" value="创建21天卡" class="btn-bd">
+			</div>
+		</div>
+	</body>
+</html>

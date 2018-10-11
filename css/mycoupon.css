@@ -1,0 +1,90 @@
+body{font-family: "微软雅黑"; margin:0px; padding:0px; overflow:hidden;}
+ul{width:94%;margin:0 auto;list-style:none}
+li{overflow:hidden;border-bottom:none; width:auto;float:left;}
+.demo {
+    width:100%;
+    margin:0 auto;
+}
+.stamp * {
+    padding: 0;
+    margin: 0;
+    list-style:none;
+}
+.stamp {
+    width: 90%;
+    height: 7.2rem;
+    position: relative;
+    overflow: hidden;
+    margin:0 auto;
+    background-size: 100% auto;
+    background-image:url(/img/coupon/coupon_s.png);
+    background-repeat:no-repeat;
+}
+.over_s {
+    width: 90%;
+    height: 7.2rem;
+    position: relative;
+    overflow: hidden;
+    margin:0 auto;
+    background-size: 100% auto;
+    background-image:url(/img/coupon/coupon_ccc.png);
+    background-repeat:no-repeat;
+}
+.over_m {
+    width: 90%;
+    height: 7.2rem;
+    position: relative;
+    overflow: hidden;
+    margin:0 auto;
+    background-size: 100% auto;
+    background-image:url(/img/coupon/coupon_ccc.png);
+    background-repeat:no-repeat;
+}
+.none_s {
+    width: 90%;
+    height: 7.2rem;
+    position: relative;
+    overflow: hidden;
+    margin:0 auto;
+    background-size: 100% auto;
+    background-image:url(/img/coupon/coupon_ccc.png);
+    background-repeat:no-repeat;
+}
+.none_m {
+    width: 90%;
+    height: 7.2rem;
+    position: relative;
+    overflow: hidden;
+    margin:0 auto;
+    background-size: 100% auto;
+    background-image:url(/img/coupon/coupon_ccc.png);
+    background-repeat:no-repeat;
+}
+.stamp_m {
+    width: 90%;
+    height: 7.2rem;
+    position: relative;
+    overflow: hidden;
+    margin:0 auto;
+    background-size: 100% auto;
+    background-image:url(/img/coupon/coupon_m.png);
+    background-repeat:no-repeat;
+}
+.stamp_1080 {
+    width: 90%;
+    height: 7.2rem;
+    position: relative;
+    overflow: hidden;
+    background-size: 100% auto;
+    background-image:url(/img/coupon/coupon_s.png);
+    background-repeat:no-repeat;
+}
+.stamp_m1080 {
+    width: 90%;
+    height: 7.2rem;
+    position: relative;
+    overflow: hidden;
+    background-size: 100% auto;
+    background-image:url(/img/coupon/coupon_m.png);
+    background-repeat:no-repeat;
+}

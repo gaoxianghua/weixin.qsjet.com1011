@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="<?php echo base_url();?>" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="x-rim-auto-match" content="none" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>兑换操作</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/alert.js"></script>
+    <script type="text/javascript" src="js/loading.js"></script>
+    <style>
+        p{float:left;padding:3% 0 2.2% 2.2%;width:12.5%;text-align:left}
+        input[type=text]{padding:3% 8% 2.4% 3%;}
+        input[type=password]{padding:3% 8% 2.4% 3%;}
+        .span_hidden{display:none;}
+        #popDiv,#popDiv1{background:#595959;width: 80%;top: 20%;}
+        .btn-bd{margin-top: 10%;}
+        .bottom a{display: inline-block;margin-top: 3%;}
+        .forgetPw{margin-left: 3%;}
+        .register{float: right;margin-right: 3%;color: rgb(11, 142, 241)}
+    </style>
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+<div>
+    <div  style="float: left;margin-left: 2%;"><a href="/ex_account/setpwd?open_id=<?php echo $open_id; ?>" style="text-decoration:none;">修改密码</a></div>
+    <div style="float: right;margin-right: 2%;"><a href="/ex_account/loginout?open_id=<?php echo $open_id; ?>" style="text-decoration:none;">退出登录</a></div>
+</div>
+<div id="container" style="margin-top: 6%">
+    <form method="get" action="/ex_account/exchange">
+        <div class="middle">
+            <br/>  <br/>
+            <ul>
+                <li class="li_first"><p style="width:20%"></p>
+                    <input style="width:70%;margin-top: 0.4%;" type="text" class="account" maxlength='11' name="phone_con" placeholder="请输入手机号或兑换码" onfocus='span_hidden()' />
+                    <input type="hidden" name="open_id" value="<?php echo $open_id; ?>">
+                    <br>
+                </li>
+            </ul>
+
+        </div>
+        <div class="bottom">
+            <span class="tip"></span>
+            <input type="submit" value="提交" class="btn-bd">
+        </div>
+    </form>
+</div>
+</body>
+</html>

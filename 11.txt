@@ -1,0 +1,8 @@
+<xml><ToUserName><![CDATA[gh_200bf643300a]]></ToUserName>
+<FromUserName><![CDATA[oaIgKtwApuUz2SfaK3Mcw0_UR36U]]></FromUserName>
+<CreateTime>1539223815</CreateTime>
+<MsgType><![CDATA[event]]></MsgType>
+<Event><![CDATA[VIEW]]></Event>
+<EventKey><![CDATA[https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb7729605637ecb26&redirect_uri=http://weixin.qsjet.com/wechat_oAuth2/index&response_type=code&scope=snsapi_base&state=registerProject#wechat_redirect]]></EventKey>
+<MenuId>441902210</MenuId>
+</xml>

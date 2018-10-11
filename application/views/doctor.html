@@ -1,0 +1,120 @@
+<html lang="en">
+<head>
+	<base href="<?php echo base_url();?>" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" /> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+    <META HTTP-EQUIV="Expires" CONTENT="0"> 
+  	<meta http-equiv="x-rim-auto-match" content="none" /> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title></title>
+	<link rel="stylesheet" href="css/style.css" />
+	<script type="text/javascript" src="js/echarts.min.js"></script>
+	<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/alert.js"></script>
+	<style>
+.title{background:#fff;padding:1.5%}
+.title p{margin-left:1.5%;color:#999}
+.info{padding:3%;color:#999;background:#fff;margin-top: 1.5%;}
+.info span{color:#000}
+a{text-decoration : none;}
+.bottom{background: #fff;margin-top: 3%;}
+.bottom-top{padding: 2% 0;text-align: center;margin-top: 3%;overflow: hidden;}
+.p-left i{width: 15px;height: 20px;display: inline-block;}
+.p-right p{margin-right: 3%;margin-top:2%;width:45%;display: inline;margin-left:-2%;}
+.p-right i{background: #1480D1;display: inline-block;margin-right: 1.5%;}
+.btn-bd{border: 1px solid #1480D1; background: #fff;color: #1480D1;}
+@media screen and (min-width:310px) and (max-width:375px){.mid-left,.mid-right{width: 23%;}.tuijian,.chengjiao{font-size:18px}.mid-left,.mid-right{padding: 4% 0;}.p-right i{width:9px;height:9px;}.p-left{margin-left:1%;}#main{height:255px;}}
+@media screen and (min-width:376px) and (max-width:414px){.tuijian,.chengjiao{font-size:20px}.mid-left,.mid-right{padding: 3.8% 0;}.p-right i{width:10px;height:10px;}.p-left{margin-left:1.7%;padding:0% 0.4% 1% 0.4%;}#main{height:260px;}}
+@media screen and (min-width:415px) and (max-width:525px){.tuijian,.chengjiao{font-size:22px}.mid-left,.mid-right{padding: 4% 0;}.p-right i{width:11px;height:11px;}.p-left{margin-left:2.5%;padding:0.4% 1% 1% 0.4%;}#main{height:260px;}}
+@media screen and (min-width:526px) and (max-width:639px){.tuijian,.chengjiao{font-size:27px}.mid-left,.mid-right{padding: 5.5% 0;}.p-right i{width:12px;height:12px;}.p-left{margin-left:4.2%;padding:1% 1% 1.5% 1%;}#main{height:270px;}}
+@media screen and (min-width:640px) and (max-width:719px){.tuijian,.chengjiao{font-size:29px}.mid-left,.mid-right{padding: 5% 0;}.p-right i{width:14px;height:14px;}.p-left{margin-left:4.5%;padding:1% 1% 1.5% 1%;}.p-left i{height:24px;}#main{height:280px;}}
+@media screen and (min-width:720px) and (max-width:749px){.bottom{height:16.2rem}.mid-left,.mid-right{padding: 5% 0;}.p-right i{width:16px;height:16px;}.p-left{margin-left:5.2%;}#main{height:300px;}.p-left i{height:22px;}}
+@media screen and (min-width:750px) and (max-width:799px){.bottom{height:16.2rem}.mid-left,.mid-right{padding: 5.5% 0;}.p-right i{width:18px;height:18px;}.p-left{margin-left:6%;}#main{height:300px;}.p-left i{height:23px;}}
+@media screen and (min-width:800px)and (max-width:1023px){.tuijian,.chengjiao{font-size:35px}.mid-left,.mid-right{padding: 6% 0;}.p-right i{width:20px;height:20px;vertical-align: middle;}.p-left{margin-left:10%;}#main{height:320px;}.p-left i{height:24px;}}
+@media screen and (min-width:1024px)and (max-width:1920px){.mid-left,.mid-right{width: 22%;}.tuijian,.chengjiao{font-size:35px}.mid-left,.mid-right{padding: 7% 0;}.p-right i{width:25px;height:25px;vertical-align: middle;}.p-left{margin-left:12%;}#main{height:350px;}.p-left i{height:24px;}}
+.bottom {
+	width: 60%;
+	height: 16.2rem;
+	position: relative;
+	overflow: hidden;
+	margin:0 auto;
+	margin-top: 4%;
+	background-size: 100% auto;
+	background-image:url(img/coupon/calendar.png);
+	background-repeat:no-repeat;
+}
+.bottom_m {
+	width: 60%;
+	height: 16.2rem;
+	position: relative;
+	overflow: hidden;
+	margin:0 auto;
+	margin-top: 2%;
+	background-size: 100% auto;
+	background-image:url(img/coupon/calendar.png);
+	background-repeat:no-repeat;
+}
+	</style>
+</head>
+<body style="background-color: #fff;">
+		<div style="width: 100%;float: left;">
+			<div style="margin-left:10%;width: 18%;height: 12%;margin-top: 4%;float: left;">
+				<img style="width: 100%;height:100%;" src="img/coupon/photo.png">
+			</div>
+			<div style="float:right;margin-top: 4%;width: 60%;margin-right: 8%;">
+				<span>编号：<?php echo isset($result['doctor_name'])?$result['doctor_name']:'';?></span>
+				<div style="margin-top: 6%;"></div>
+				<div style="width: 52%;height: 6%;">
+					<table>
+						<tr>
+							<td><input type="button" value="点击查看详情" onclick="viewInfo()" style="padding: 5px 20px;border-radius: 3px; background:#098DEF;border: none; color: #fff;"></td>
+							<td><input type="button" value="更改密码" onclick="changeCode()" style="padding: 5px 20px;border-radius: 3px; background:#098DEF;border: none; color: #fff;"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<br/>
+	<div class="top">
+		<div class="bottom">
+			<div style="position:absolute; top:20%; right:0; bottom:0; left:0; margin:auto;">
+				<div style="width: 100%;text-align: center;"><span>您已让</span></div><br/>
+				<div  style="width: 100%;text-align: center;"><span><font size="16"><?php echo isset($result['recom'])?$result['recom']:'';?></font></span></div><br/>
+				<div style="width: 100%;text-align: center;"><span><font>位患者了解无针技术</font></span></div>
+			</div>
+		</div>
+		<div class="bottom_m">
+			<div style="position:absolute; top:20%; right:0; bottom:0; left:0; margin:auto;">
+				<div style="width: 100%;text-align: center;"><span>您已帮</span></div><br/>
+				<div  style="width: 100%;text-align: center;"><span><font size="16"><?php echo isset($result['num_m'])?$result['num_m']:'';?></font></span></div><br/>
+				<div style="width: 100%;text-align: center;"><span><font>位患者告别打针痛苦</font></span></div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+    function changeCode(){
+        location.href="<?php echo base_url('doctor/resetCode?open_id='.$open_id.'&qc_code='.$qc_code);?>";
+    }
+    function viewInfo(){
+        location.href="<?php echo base_url('doctor/showInfo?open_id='.$open_id.'&qc_code='.$qc_code);?>";
+    }
+    window.onload = function () {
+        var tb = document.getElementById("tb");
+        var tbody = tb.getElementsByTagName("tbody")[0];
+        var trs = tbody.getElementsByTagName("tr");
+        for (var i = 0; i < trs.length; i++) {
+            if (i % 2 == 0) {
+                trs[i].style.backgroundColor = "#fff";
+            }else{
+                trs[i].style.backgroundColor = "#FFE5E4";
+			}
+        }
+    };
+</script>
+</html>

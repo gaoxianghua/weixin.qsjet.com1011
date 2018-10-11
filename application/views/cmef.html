@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="<?php echo base_url();?>" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="x-rim-auto-match" content="none" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>填写信息</title>
+    <link rel="stylesheet" href="admin/css/style.css" />
+    <script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/alert.js"></script>
+    <script type="text/javascript" src="js/loading.js"></script>
+    <script src="js/city.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <style>
+        p{float:left;padding:3% 0 2.2% 2.2%;width:12.5%;text-align:left}
+        input[type=text]{padding:3% 8% 2.4% 3%;}
+        input[type=password]{padding:3% 8% 2.4% 3%;}
+        .span_hidden{display:none;}
+        #popDiv,#popDiv1{background:#595959;width: 80%;top: 20%;}
+        .btn-bd{margin-top: 10%;}
+        .bottom a{display: inline-block;margin-top: 3%;}
+        .forgetPw{margin-left: 3%;}
+        .register{float: right;margin-right: 3%;color: rgb(11, 142, 241)}
+    </style>
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+<div id="container">
+    <form method="post" action="/cmef/submit">
+        <div class="middle">
+            <ul>
+                <li class="li_first"><p style="width:20%">姓名</p><input style="width:70%" type="text" id="inputAId"  name="username" placeholder="请输入您的姓名"/><font color="red">*</font><br></li>
+                <li class="li_first"><p style="width:20%">电话</p><input style="width:70%" type="text"  id="inputBId" class="account" maxlength='11' name="phone" placeholder="请输入您的手机号码" /><font color="red">*</font><br></li>
+                <li class="li_first"><p style="width:20%">公司名称</p><input style="width:70%" type="text" id="inputCId"   name="company" placeholder="请输入您的公司名称"/><font color="red">*</font><br></li>
+                <li class="li_first"><p style="width:20%">职位</p><input style="width:70%" type="text"  name="job"/><br></li>
+                <li class="li_first"><p style="width:20%">地区</p>
+                    <div style="margin-top: 3%">
+                        <select id="province" name="pro"></select>
+                        <select id="city" name="city"></select>
+                    </div>
+                    <script>
+                        (function(){
+                            var pHtmlStr = '';
+                            for(var name in pc){
+                                pHtmlStr = pHtmlStr + '<option>'+name+'</option>';
+                            }
+                            $("#province").html(pHtmlStr);
+                            $("#province").change(function(){
+                                var pname = $("#province option:selected").text();
+                                var pHtmlStr = '';
+                                var cityList = pc[pname];
+                                for(var index in cityList){
+                                    pHtmlStr = pHtmlStr + '<option>'+cityList[index]+'</option>';
+                                }
+                                $("#city").html(pHtmlStr);
+                            });
+                            $("#province").change();
+                        })();
+                    </script>
+                </li>
+                <li class="li_first"><p style="width:20%">  </p><input style="width:70%" type="text"  name="address" id="inputDId" placeholder="请输入地址"/><font color="red">*</font><br></li>
+
+                <li class="li_first"><p style="width:20%">邮箱</p><input style="width:70%" type="text"  name="email"/><br></li>
+            </ul>
+            <input type="hidden" name ="openid" value="<?php echo $openid; ?>">
+            <br/>
+
+            <div style="float: right;margin-right: 40%"><input type="submit" value="提交并领取资料" class="btn-bd" onclick="return checkStr()" style="width: 120px;"/></div>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    function checkStr() {
+        var title = document.getElementById("inputAId").value.trim();
+        var phone = document.getElementById("inputBId").value.trim();
+        var company = document.getElementById("inputCId").value.trim();
+        var address = document.getElementById("inputDId").value.trim();
+        if (title == null || title == "") {
+            alert("请输入您的姓名");
+            return false;
+        }
+        if (phone == null || phone == "") {
+            alert("请输入您的手机号");
+            return false;
+        }
+        var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        if(!myreg.test($("#inputBId").val()))
+        {
+            alert('请输入有效的手机号码！');
+            return false;
+        }
+        if (company == null || company == "") {
+            alert("请输入您的公司");
+            return false;
+        }
+        if (address == null || address == "") {
+            alert("请输入您的地址");
+            return false;
+        }
+    }
+</script>
+</html>

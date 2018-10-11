@@ -1,0 +1,85 @@
+@CHARSET "UTF-8";
+.header_top{
+	background-color: #ffffff;
+	width: 100%;
+	height: 60px;
+	margin: 0px;
+}
+
+.header_right{
+	float: right;
+	padding-right: 164px;
+	line-height: 60px;
+}
+
+.header_top span a,.header_top span span{
+	color:#5588cc;
+}
+
+.header_top span a:hover{
+	color:#FFF;
+	text-decoration: none;
+}
+
+.header_top span img{
+	width: 112px;
+	/*height: 60px;*/
+	margin-left: 40px;
+	margin-top: 14px;
+}
+
+.navbar_menu{
+	min-width: 1700px;
+	background-color: #032840;
+	width: 100%;
+	height: 142px;
+	margin: 0px;
+	
+}
+
+.header_left{
+	margin: 0px 0 0 30px;
+        padding: 10px;
+}
+
+.navbar_menu ul{
+	list-style: none;
+	padding: 0px;
+	margin:0px auto; 
+	width: 1000px;
+	height: 142px;
+}
+
+.navbar_menu ul li{
+	width: 132px;
+	text-align: center;
+}
+
+.navbar_menu li {
+	padding: 0px;
+	height: 46px;
+	width:122px;
+	line-height: 46px;
+	float: left;
+	text-align:center;
+	margin-top: 18px;
+}
+
+.navbar_menu li:hover , .navbar_menu .on {
+	background-color: #555555;
+	border-radius: 8px; 
+	-webkit-border-radius: 8px;
+}
+
+.navbar_menu a li{
+	color: #f2f2f2;
+	font-family: Microsoft YaHei;
+	font-size: 18px;
+}
+
+.navbar_menu a li:hover{
+	color: #f2f2f2;
+	font-family: Microsoft YaHei;
+	font-size: 18px;
+	text-decoration: none;
+}

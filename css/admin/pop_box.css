@@ -1,0 +1,144 @@
+/*第一个样式可以去掉，只是为了方便预览*/
+.pop_mask{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	/*background: rgba(0,0,0,0.5);*/
+	z-index: 10;
+	display: none;
+}
+.mask_bg{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 101;
+	display: none;
+}
+.popBox{
+	width: 600px;
+	/*height: 250px;*/
+	background: white;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	display: none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 150;
+}
+.pop_content{
+	width: 500px;
+	margin-left: 50px;
+}
+div,p,input,img,span{
+	margin: 0;
+	padding: 0;
+}
+.br{
+	clear: both;
+}
+.fl {
+    float: left;
+    color: #000;
+}
+.pr {
+	color: #000;
+    position: relative;
+}
+.popBoxTitle{
+	font-family: "微软雅黑",serif;
+	font-size: 16px;
+	color: #333333;
+	margin-top: 20px;
+	margin-bottom: 5px;
+	line-height: 70px;
+}
+.popBoxDetail{
+	width: 400px;
+}
+.marlt-10 {
+    margin-left: 10px;
+}
+.reasonBox{
+	display: block;
+	width: 98.5%;
+	border: 1px solid #ADADAD;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	font-family: "微软雅黑",serif;
+	font-size: 16px;
+	color: #333333;
+	outline: none;
+	resize: none;
+}
+.sbumitBtn{
+	float: right;
+	width: 100px;
+	height: 30px;
+	margin-top: 10px;
+	border: 1px solid #ADADAD;
+	border-radius: 5px;
+	font-family: "微软雅黑",serif;
+	font-size: 16px;
+	color: #333333;
+	background-color: white;
+	outline: none;
+}
+.close_apply_txt{
+	background: url(../../img/space/textarea.png);
+	width: 526px;
+	height: 101px;
+}
+.refuse_reason_txt_cont{
+	width: 100%;
+	height: 100%;
+	border: 1px solid #F2F2F2;
+	outline: none;
+	color: #808080;
+	resize: none;
+	text-align: left;
+	font-family: "微软雅黑",serif;
+	font-size: 14px;
+	line-height: 20px;
+}
+.submit_btn{
+	margin-top: 15px;
+	margin-bottom: 20px;
+	width: 100px;
+	float: right;
+}
+.close_apply_item{
+	margin-left: 20px;
+	margin-top: 10px;
+	font-size: 14px;
+	color: #000000;
+	opacity: 0.7;
+}
+
+.first_menu{
+    float:left;
+}
+.first_menu li{
+    width: 100px;
+    height:25px;
+    text-align: center;
+    display: block;
+    float:left;
+    list-style:none;
+    margin-left:30px;
+    margin-top: 20px;
+    color: #333333;
+}
+.active{
+	border-bottom: 2px solid #1A89DA;
+	color: #337ab7 !important;
+}
+a:hover{
+	text-decoration: none;
+}
+
+.userInfo ul li{list-style: none; margin-bottom: 20px;}

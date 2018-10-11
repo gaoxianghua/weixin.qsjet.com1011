@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>兑换账号管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="<?php echo base_url()?>css/express/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="<?php echo base_url()?>css/express/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+    <link href="<?php echo base_url()?>css/express/bootstrap-admin-theme.css" rel="stylesheet" media="screen">
+    <link href="<?php echo base_url()?>css/express/DT_bootstrap.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="<?php echo base_url()?>js/express/js/html5shiv.js"></script>
+    <script type="text/javascript" src="<?php echo base_url()?>js/express/js/respond.min.js"></script>
+</head>
+<body class="bootstrap-admin-with-small-navbar">
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+    <div class="container">
+        <div class="row">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="http://weixin.qsjet.com/admin">首页</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="text-muted bootstrap-admin-box-title">
+                            <span>兑换账号详情</span><span style="float: right;"></span>
+                        </div>
+                    </div>
+                    <div class="bootstrap-admin-panel-content">
+                            <table class="table table-striped table-bordered" id="example">
+                                <tr>
+                                    <th>兑换账号</th>
+                                    <th>账号名称</th>
+                                    <th>所属经销商</th>
+                                    <th>创建时间</th>
+                                </tr>
+                              <tr class='odd gradeX'>
+                                 <td><?php echo $account; ?></td>
+                                  <td><?php echo $account_name; ?></td>
+                                  <td style='white-space: nowrap;'><?php echo $dealer_name; ?></td>
+                                 <td><?php echo date('Y-m-d H:i:s',$addtime); ?></td>
+                              </tr>
+                                <tr>
+                                    <th>经销商电话</th>
+                                    <th>优惠金额</th>
+                                    <th></th>
+                                    <th>操作</th>
+                                </tr>
+                                <tr class='odd gradeX'>
+                                    <td><?php echo $dealer_tell; ?></td>
+                                    <td><?php echo $coupon_value; ?></td>
+                                    <td></td>
+                                    <td>
+                                        <a href='/admin/ex_account/editInfo_account?account_id=<?php echo $account_id; ?>'>修改</a>
+                                    </td>
+                                </tr>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/express/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/express/twitter-bootstrap-hover-dropdown.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/express/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url()?>js/express/DT_bootstrap.js"></script>
+</body>
+</html>

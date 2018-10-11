@@ -1,0 +1,7 @@
+<meta charset="utf-8">
+<?php
+$fp = fopen("http://101.201.111.237:84/weixin/pdf/science.pdf", "r");
+header("Content-type: application/pdf");
+fpassthru($fp);
+fclose($fp);
+?>

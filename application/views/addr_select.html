@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<base href="<?php echo base_url();?>">
+		<title>地区选择</title>
+		<link rel="stylesheet" href="css/zwyl_common.css" />
+		<link rel="stylesheet" href="css/zwyl_reset.css" />
+		<link rel="stylesheet" href="css/addr.css?v=20160105" />
+		<script type="text/javascript" src="js/jquery.1.7.2.min.js" ></script>
+		<script type="text/javascript" src="js/adaptation.js" ></script>
+		<style>
+			body{background-color: #f4f4f4 !important;}
+		</style>
+	</head>
+	<body>
+		<ul class="fl area-list left-list" id="proList">
+		</ul>
+		<ul class="fl area-list right-list" id="cityList">
+		</ul>
+	</body>
+	<script>
+		$(function(){
+			$.ajax({
+                type:"get",
+                url:"<?php echo base_url('areas/getSecondList?open_id='.$open_id);?>",
+                contentType: "application/x-www-form-urlencoded; charset=utf8",
+                dataType: "json",
+                success:function(data){
+                	if (data.result_code==200) {
+                		var proList = "";
+                		for (var i = 0 ;i < data.info.length; i++) {
+                			proList += '<li id="'+data.info[i].area_id+'" onclick=showCity('+data.info[i].area_id+')>'+data.info[i].area_name+'</li>';
+                		}
+                		$("#proList").html(proList);
+                		showCity(2);
+                	} 
+                },
+                error:function(err){
+                     console.log("网络错误");
+                }
+            });
+		});
+		function showCity(parentId){
+			$("#proList li").removeClass("selected-li");
+			$("#"+parentId).addClass("selected-li");
+			window.localStorage.setItem("pro",$("#"+parentId).html());
+			$.ajax({
+                type:"get",
+                url:"<?php echo base_url('areas/getList?open_id='.$open_id);?>",
+                contentType: "application/x-www-form-urlencoded; charset=utf8",
+                dataType: "json",
+                data:{parent_id:parentId},
+                success:function(data){
+                	if (data.result_code==200) {
+                		var cityList = "";
+                		for (var i = 0 ;i < data.info.length; i++) {
+                			cityList += '<li onclick="toAddr(this)">'+data.info[i].area_name+'</li>';
+                		}
+                		$("#cityList").html(cityList);
+                	} 
+                },
+                error:function(err){
+                     console.log("网络错误");
+                }
+            });
+		}
+		function toAddr(obj){
+			window.localStorage.setItem("city",$(obj).html());
+			history.go(-1);
+		}
+	</script>
+</html>

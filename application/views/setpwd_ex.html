@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="<?php echo base_url();?>" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="x-rim-auto-match" content="none" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>修改密码</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/alert.js"></script>
+    <style>
+        p{float:left;padding:3% 0 2.2% 2.2%;width:17.5%;text-align:left}
+        input[type=text]{padding:3% 0% 2.4% 3%;width:80%;}
+        input[type=password]{padding:3% 0% 2.4% 3%;width:80%;}
+        .span_hidden{display:none;}
+        .btn-bd{margin-top: 10%;}
+        .yzm_btn{border: none;outline: none; border-radius: 4px;background:#1480D1;color: #fff;height: 25px;width: 80px;margin-top: 6px;}
+        #popDiv,#popDiv1{background:#595959;width: 80%;top: 20%;}
+    </style>
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+<div id="container">
+    <form action="/ex_account/dopwd" method="post">
+    <div class="middle">
+        <ul>
+            <li class="li_first"><p>原密码</p><input type="password" class="ypw" name="password" placeholder="请输入您的原密码" onfocus='span_hidden()' /><br></li>
+            <li class="li_first"><p>新密码</p><input type="password" class="pw" placeholder="请输入您的新密码" onfocus='span_hidden()' /><br></li>
+            <span id="span_pw" class='span_hidden'><font color='red' size='1'>密码为6~15位,由数字、字母、下划线组成！</font></span>
+            <li class="li_last"><p>再次确认</p><input type="password" class="pd" name="newpwd" placeholder="请再次输入您的新密码" onfocus='span_hidden()' /><br></li>
+            <span id="span_pd" class='span_hidden'><font color='red' size='1'>两次密码输入不一致！</font></span>
+            <input type="hidden" name="open_id" value="<?php echo $open_id; ?>">
+        </ul>
+    </div>
+    <div class="bottom">
+        <input type="submit" value="提交" class="btn-bd">
+    </div>
+    </form>
+</div>
+</body>
+</html>
+<script>
+
+    $(".btn-bd").click(function(){
+        var pw=$(".pw").val();
+        var pd=$(".pd").val();
+        var REG_PASSWORD = /^[0-9A-Za-z_\.\+\-\!\@\#\$\%\^\&\*]{6,15}$/;
+
+        if(!REG_PASSWORD.test(pw)){
+            $('#span_pw').show();
+            return false;
+        }
+        if(pw != pd){
+            $('#span_pd').show();
+            return false;
+        }
+    })
+
+</script>

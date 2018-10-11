@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="<?php echo base_url();?>" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="x-rim-auto-match" content="none" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+    <script src="js/hotcss.js"></script>
+    <title>领取成功</title>
+    <style>
+        body{font-family: "Arial"; margin:0px; padding:0px; overflow:hidden;}
+        ul{width:94%;margin:0 auto;list-style:none}
+        li{overflow:hidden;border-bottom:none; width:auto;float:left;}
+        .demo {
+            width:100%;
+            margin:0 auto;
+            height: 100%;
+        }
+        .demo2 {
+            width:100%;
+            margin:0 auto;
+        }
+        .stamp * {
+            padding: 0;
+            margin: 0;
+            list-style:none;
+        }
+        .stamp_m {
+            width: 90%;
+            height: 7.2rem;
+            position: relative;
+            overflow: hidden;
+            margin:0 auto;
+            background-size: 100% auto;
+            background-image:url(img/coupon/coupon_m.png);
+            background-repeat:no-repeat;
+        }
+    </style>
+</head>
+<body>
+<!---i8--->
+    <div class="demo" style="display: none;">
+        <div class="stamp_m" style="margin-top:8%;">
+            <div class="img" style="width:28%;float: left;margin-left: 4%;margin-top: 8%;">
+                <div style="text-align: center;letter-spacing: -0.1rem;">
+                    <span style="font-size: 0.5rem;white-space:nowrap;"><font color="#dafffa"><b>￥</b><b style="font-size: 2.6rem"><?php echo $value;?> &nbsp;</b></font></span>
+                </div>
+                <div style="width: 100%;text-align: center;font-size: 0.5rem;margin-left: 6%;"><font color="#dafffa"><b>仅限购买时使用</b></font></div>
+            </div>
+
+            <div class="font_s" style="width: 62%;height:100%;float: right;margin-right: 2%;display: flex;align-items: center;">
+                <ul>
+                    <li style="font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;">
+                        <font color="#dafffa"><?php echo date('m月d日',$result['addtime']); ?> - <?php echo date('m月d日',$result['overtime']); ?>使用有效</font>
+                    </li>
+                    <li style="font-size: 1.2rem;white-space:nowrap;margin-bottom: 0.4rem;margin-left: 22%;">
+                        <font color="#dafffa"><b>代金券</b></font>
+                    </li>
+                    <li style="font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;margin-left: 12%;">
+                        <font color="#036053"><b>兑换码：<?php echo $result['con_code_m']; ?></b></font>
+                    </li>
+                    <li style='font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;background-color: #038472;margin-left: 4%;'>
+                        <font color="#dafffa"><b>&nbsp;&nbsp;经销商电话：<?php echo $dealer_tell; ?>&nbsp;&nbsp;</b></font>
+                    </li>
+                    <li style="font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;margin-left: 11%;">
+                        <font color="#dafffa"><b>最终解释权归快舒尔所有</b></font>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!----试用---->
+        <div style="width: 90%;height:6rem;background-color: #FE9902;margin: 0 auto;margin-top: 4%;">
+           <div style="width: 100%;height:auto;text-align: center;font-size: 1.2rem;">
+               <font color="#fbf294" style="display:inline-block;margin-top: 8%;"><b>您已获得免费体验机会</b></font>
+           </div>
+           <div style="width: 100%;text-align: center;font-size: 0.5rem;margin-top: 4%;">
+               <span style="display: inline-block;height:0.8rem;line-height:0.8rem;background-color:  #F8820F;"><font color="#fff"><b>&nbsp;&nbsp;&nbsp;经销商电话：<?php echo $dealer_tell; ?>&nbsp;&nbsp;&nbsp;</b></font></span>
+           </div>
+           <div style="width: 100%;text-align: center;font-size: 0.5rem;margin-top: 4%;">
+               <font color="#fff"><b>如需使用该券，请提前致电预约</b></font>
+           </div>
+        </div>
+        <div style="margin-top: 4%;width: 100%;float: left;text-align: center;">
+            <img src="img/coupon/bg_v2.png"/>
+        </div>
+    </div>
+<!---1080--->
+<div class="demo2" style="display: none;">
+    <div class="stamp_m" style="margin-top:6%;">
+        <div class="img" style="width:28%;float: left;margin-left: 4%;margin-top: 14%;">
+            <div style="text-align: center;letter-spacing: -0.1rem;">
+                <span style="font-size: 0.5rem;white-space:nowrap;"><font color="#dafffa"><b>￥</b><b style="font-size: 2.6rem"><?php echo $value;?> &nbsp;</b></font></span>
+            </div>
+            <div style="width: 100%;text-align: center;font-size: 0.5rem;margin-left: 6%;"><font color="#dafffa"><b>仅限购买时使用</b></font></div>
+        </div>
+
+        <div class="font_s" style="width: 58%;height:100%;float: right;margin-right: 2%;display: flex;align-items: center;">
+            <ul>
+                <li style="font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;">
+                    <font color="#dafffa"><?php echo date('m月d日',$result['addtime']); ?> - <?php echo date('m月d日',$result['overtime']); ?>使用有效</font>
+                </li>
+                <li style="font-size: 1.2rem;white-space:nowrap;margin-bottom: 0.4rem;margin-left: 22%;">
+                    <font color="#dafffa"><b>代金券</b></font>
+                </li>
+                <li style="font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;margin-left: 16%;">
+                    <font color="#036053"><b>兑换码：<?php echo $result['con_code_m']; ?></b></font>
+                </li>
+                <li style='font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;background-color: #038472;margin-left: 4%;'>
+                    <font color="#dafffa"><b>&nbsp;经销商电话：<?php echo $dealer_tell; ?>&nbsp;</b></font>
+                </li>
+                <li style="font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;margin-left: 10%;">
+                    <font color="#dafffa"><b>最终解释权归快舒尔所有</b></font>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="width: 90%;height:6rem;background-color: #FE9902;margin: 0 auto;margin-top: 4%;">
+        <div style="width: 100%;height:auto;text-align: center;font-size: 1.2rem;">
+            <font color="#fbf294" style="display:inline-block;margin-top: 8%;"><b>您已获得免费体验机会</b></font>
+        </div>
+        <div style="width: 100%;text-align: center;font-size: 0.5rem;margin-top: 4%;">
+            <span style="background-color:  #F8820F;"><font color="#fbf294"><b>&nbsp;经销商电话：<?php echo $dealer_tell; ?>&nbsp;</b></font></span>
+        </div>
+        <div style="width: 100%;text-align: center;font-size: 0.5rem;margin-top: 4%;">
+            <font color="#fbf294"><b>如需使用该券，请提前致电预约</b></font>
+        </div>
+    </div>
+    <div style="margin-top: 4%;text-align: center;">
+        <img style="width: 60%;" src="img/coupon/bg_v2.png"/>
+    </div>
+</div>
+<!---640--->
+<div class="demo3" style="display: none;">
+    <div class="stamp_m" style="margin-top:6%;">
+        <div class="img" style="width:32%;float: left;margin-left: 4%;margin-top: 12%;">
+            <div style="text-align: center;letter-spacing: -0.1rem;">
+                <span style="font-size: 0.5rem;white-space:nowrap;"><font color="#dafffa"><b>￥</b><b style="font-size: 2.6rem"><?php echo $value;?> &nbsp;</b></font></span>
+            </div>
+            <div style="width: 100%;text-align: center;font-size: 0.5rem;margin-left: 2%;"><font color="#dafffa"><b>仅限购买时使用</b></font></div>
+        </div>
+        <div class="font_s" style="width: 58%;height:100%;float: right;margin-right: 6%;display: flex;align-items: center;">
+            <ul>
+                <li style="font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;">
+                    <font color="#dafffa"><?php echo date('m月d日',$result['addtime']); ?> - <?php echo date('m月d日',$result['overtime']); ?>使用有效</font>
+                </li>
+                <li style="font-size: 1.2rem;white-space:nowrap;margin-bottom: 0.4rem;margin-left: 16%;">
+                    <font color="#dafffa"><b>代金券</b></font>
+                </li>
+                <li style="font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;margin-left: 6%;">
+                    <font color="#036053"><b>兑换码：<?php echo $result['con_code_m']; ?></b></font>
+                </li>
+                <li style='font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;background-color: #038472;'>
+                    <font color="#dafffa"><b>&nbsp;经销商电话：<?php echo $dealer_tell; ?>&nbsp;</b></font>
+                </li>
+                <li style="font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;margin-left: 8%;">
+                    <font color="#dafffa"><b>最终解释权归快舒尔所有</b></font>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="width: 90%;height:6rem;background-color: #FE9902;margin: 0 auto;margin-top: 4%;">
+        <div style="width: 100%;height:auto;text-align: center;font-size: 1.2rem;">
+            <font color="#fbf294" style="display:inline-block;margin-top: 8%;"><b>您已获得免费体验机会</b></font>
+        </div>
+        <div style="width: 100%;text-align: center;font-size: 0.5rem;margin-top: 4%;">
+            <span style="background-color:  #F8820F;"><font color="#fbf294"><b>&nbsp;经销商电话：<?php echo $dealer_tell; ?>&nbsp;</b></font></span>
+        </div>
+        <div style="width: 100%;text-align: center;font-size: 0.5rem;margin-top: 4%;">
+            <font color="#fbf294"><b>如需使用该券，请提前致电预约</b></font>
+        </div>
+    </div>
+    <div style="margin-top: 4%;text-align: center;">
+        <img style="width: 60%;" src="img/coupon/bg_v2.png"/>
+    </div>
+</div>
+
+<!---1152--->
+<div class="demo4" style="display: none;">
+    <div class="stamp_m" style="margin-top:6%;">
+        <div class="img" style="width:28%;float: left;margin-left: 4%;margin-top: 12%;">
+            <div style="text-align: center;letter-spacing: -0.1rem;">
+                <span style="font-size: 0.5rem;white-space:nowrap;"><font color="#dafffa"><b>￥</b><b style="font-size: 2.4rem"><?php echo $value;?> &nbsp;</b></font></span>
+            </div>
+            <div style="width: 100%;text-align: center;font-size: 0.5rem;margin-left: 2%;">
+                <font color="#dafffa"><b>仅限购买时使用</b></font>
+            </div>
+        </div>
+
+        <div class="font_s" style="width: 58%;height:100%;float: right;margin-right: 3%;display: flex;align-items: center;">
+            <ul style="margin-top: 2%;">
+                <li style="font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;">
+                    <font color="#dafffa"><?php echo date('m月d日',$result['addtime']); ?> - <?php echo date('m月d日',$result['overtime']); ?>使用有效</font>
+                </li>
+                <li style="font-size: 1.2rem;white-space:nowrap;margin-bottom: 0.4rem;margin-left: 20%;">
+                    <font color="#dafffa"><b>代金券</b></font>
+                </li>
+                <li style="font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;margin-left: 11%;">
+                    <font color="#036053"><b>兑换码：<?php echo $result['con_code_m']; ?></b></font>
+                </li>
+                <li style='font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;background-color: #038472;'>
+                    <font color="#dafffa"><b>&nbsp;&nbsp;经销商电话：<?php echo $dealer_tell; ?>&nbsp;&nbsp;</b></font>
+                </li>
+                <li style="font-size: 0.5rem;white-space:nowrap;margin-bottom: 0.4rem;margin-left: 10%;">
+                    <font color="#dafffa"><b>最终解释权归快舒尔所有</b></font>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style="width: 90%;height:6rem;background-color: #FE9902;margin: 0 auto;margin-top: 4%;">
+        <div style="width: 100%;height:auto;text-align: center;font-size: 1.2rem;">
+            <font color="#fbf294" style="display:inline-block;margin-top: 6%;"><b>您已获得免费体验机会</b></font>
+        </div>
+        <div style="width: 100%;text-align: center;font-size: 0.5rem;margin-top: 4%;">
+            <span style="display: inline-block;height:1.0rem;line-height:1.0rem;background-color:  #F8820F;"><font color="#fff"><b>&nbsp;&nbsp;&nbsp;经销商电话：<?php echo $dealer_tell; ?>&nbsp;&nbsp;&nbsp;</b></font></span>
+        </div>
+        <div style="width: 100%;text-align: center;font-size: 0.5rem;margin-top: 4%;">
+            <font color="#fff"><b>如需使用该券，请提前致电预约</b></font>
+        </div>
+    </div>
+    <div style="margin-top: 4%;text-align: center;">
+        <img style="width: 60%;" src="img/coupon/bg_v2.png"/>
+    </div>
+</div>
+<div class="window" style="display: none;">
+    <span>请在手机端查看。</span>
+</div>
+</body>
+<script type="text/javascript">
+
+    //定义变量获取屏幕视口宽度
+    var windowWidth = $(window).width();
+    if(windowWidth <= 640){
+        $(".demo3").show();
+    }
+    if(windowWidth > 640 && windowWidth <= 750){
+        $(".demo").show();
+    }
+    if(windowWidth > 750 && windowWidth <= 1080){
+        $(".demo2").show();
+    }
+    if(windowWidth > 1080 && windowWidth <= 1500){
+        $(".demo4").show();
+    }
+    if(windowWidth > 1500){
+        $(".window").show();
+    }
+
+</script>
+</html>

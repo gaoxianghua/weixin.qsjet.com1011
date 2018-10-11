@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+.footer{
+	height: 52px;
+	margin: 0px;
+	line-height: 52px;
+	padding-left: 34px;
+}
+
+.right{
+	float: right;
+	padding-right: 34px;
+}

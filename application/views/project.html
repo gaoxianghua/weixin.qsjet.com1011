@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="<?php echo base_url();?>" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" /> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta http-equiv="x-rim-auto-match" content="none" />
+  	<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Expires" CONTENT="0">  
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>产品中心</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/dropload.css">
+	<script type="text/javascript" src="js/alert.js"></script>
+	<script type="text/javascript" src="js/zepto.js"></script>
+	<script type="text/javascript" src="js/dropload.min.js"></script>
+	<style type="text/css">
+		#container{background: #fff;}
+		.content div a:link,.content div a:visited{text-decoration: none;}
+		img{width:100%;vertical-align: middle;border: none;}
+		.content div{width: 48%;display: inline-block;}
+		.odd{background: #fff!important;float: left;width: 46%;margin-left: 2%;margin-top: 2%}
+		.even{background: #fff!important;float: right;width: 46%;margin-right: 2%;margin-top: 2%}
+		.title{margin-top: 2.5%;line-height: 25px;height:25px;text-align:center;background: #1480D1;color: #FEFEFE;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+		.cont{width: 100%!important;}
+		.outer{position:absolute;top:0;left:0;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;width:100%;height:100%;-ms-flex-direction:column;-webkit-box-orient:vertical;box-orient:vertical;-webkit-flex-direction:column;flex-direction:column;}
+		.inner{overflow-y:scroll;-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;-webkit-overflow-scrolling:touch;}
+		.opacity{-webkit-animation:opacity .5s linear;animation:opacity .5s linear;}
+		.dropload-down{float:left;margin-left:40%;}
+		@-webkit-keyframes opacity{0%{opacity:0;}
+		100%{opacity:1;}
+		}
+		@keyframes opacity{0%{opacity:0;}
+		100%{opacity:1;}
+		}
+		@media screen and (min-width:310px) and (max-width:375px){img{height: 125px;}}
+		@media screen and (min-width:376px) and (max-width:414px){img{height: 145px;}}
+		@media screen and (min-width:415px) and (max-width:639px){img{height: 185px;}}
+		@media screen and (min-width:640px) and (max-width:719px){img{height: 215px;}}
+		@media screen and (min-width:720px) and (max-width:749px){img{height: 245px;}}
+		@media screen and (min-width:750px) and (max-width:799px){img{height: 275px;}}
+		@media screen and (min-width:800px)and (max-width:1023px){img{height: 305px;}}
+		@media screen and (min-width:1024px)and (max-width:1920px){img{height: 335px;}}
+	</style>
+</head>
+<body>
+	<div class="outer">
+	    <div class="inner">
+	        <div class="lists"></div>
+	    </div>
+	</div>
+<script type="text/javascript">
+$(function(){
+		var qcode_url = "<?php echo isset($qcode_url)?$qcode_url:'';?>";
+		var sum_size = "<?php echo isset($total)?$total:'0';?>";
+		var page_all = Math.ceil(sum_size/6);
+		var page=-1;
+	    // dropload
+	    var dropload = $('.inner').dropload({
+        domDown : {
+            domClass   : 'dropload-down',
+            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+            domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+            domNoData  : '<div class="dropload-noData">没有更多了</div>'
+        },
+        loadDownFn : function(me){
+        	page=page+1;
+        		$.ajax({
+                type: 'GET',
+                url: "<?php echo base_url('project/getProject');?>",
+                data:{page:page},
+                cache:false, 
+                dataType: 'json',
+                success: function(data){
+                    var info=data.info;
+                    var str1='';
+                    for (var i = 0; i < info.length; i++) {
+		     			if(i%2==0){
+		     				str1+="<div class='odd'><a onclick=\"detail('"+info[i].project_url+"')\" ><img src='"+qcode_url+'project/'+info[i].img+"'/><p class='title'>"+info[i].name+"</p></a></div>";
+		     			}else{
+		     				str1+="<div class='even'><a onclick=\"detail('"+info[i].project_url+"')\" ><img src='"+qcode_url+'project/'+info[i].img+"'/><p class='title'>"+info[i].name+"</p></a></div>"
+		     			}
+		     		}
+                    // 为了测试，延迟1秒加载
+                    setTimeout(function(){
+                        $('.lists').append(str1);
+                        // 每次数据加载完，必须重置
+                        dropload.resetload();
+                        if(i<6){
+                    		dropload.lock();
+                    		$(".dropload-down").children().text('没有更多了')
+                    	}
+                    },600);
+                },
+                error: function(xhr, type){ 
+           		    showPopUpDiv();
+                	getAlert({
+                    	text:"图片获取失败",
+                    	alert:0
+                    });
+                    dropload.resetload();
+                }
+            });    
+        }
+    });
+});
+</script>
+</body>
+</html>
+<script>
+	function detail(redirect_url){
+		location.href=redirect_url;
+	}
+</script>

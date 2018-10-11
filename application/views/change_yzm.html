@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<base href="<?php echo base_url();?>" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" />
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Expires" CONTENT="0"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta http-equiv="x-rim-auto-match" content="none" /> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>更换密码</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/alert.js"></script>
+	<style type="text/css">
+		.input_text{margin: 5%;width: 100%;}
+		input[type=text]{width:90%;border-radius: 6px;padding: 4% 3%;}
+		.btn-bd{margin:10% 5% 5% 5%}
+		.span_hidden{display:none;}
+	</style>
+	</head>
+	<body>
+		<div id="container">
+			<div class="input_text">
+				<input type="text" placeholder="请输入原密码，6-15数字、字母" class="raw" onfocus='span_hidden()'/><br />
+				<span id="span_raw" class='span_hidden'><font color='red' size='1'>原密码格式错误！</font></span>
+				<br>
+				<br>
+				<input type="text" placeholder="请输入新密码，6-15数字、字母" class="new1" onfocus='span_hidden()'/><br />
+				<span id="span_new1" class='span_hidden'><font color='red' size='1'>新密码格式错误！</font></span>
+				<br>
+				<br>
+				<input type="text" placeholder="确认与新密码保持一致" class="new2" onfocus='span_hidden()'/><br />
+				<span id="span_new3" class='span_hidden'><font color='red' size='1'>两次输入的密码不一致!</font></span>
+			</div>
+			<input type="button" class="btn-bd" value="提交更改" onclick="checkCode()" />
+		</div>
+	</body>
+</html>
+<script>
+	function checkCode(){
+		var str=/^[\w]{6,15}$/;
+		var raw=$(".raw").val();
+		var new1=$(".new1").val();
+		var new2=$(".new2").val();
+		if(!str.test(raw)){
+			$('#span_raw').show();
+			return false;
+		}
+		if(!str.test(new1)){
+			$('#span_new1').show();
+			return false;	
+		}
+		if( new1 != new2 ){
+			$('#span_new3').show();
+			return false;
+		}
+		var b="<?php echo base_url('doctor?open_id='.$open_id.'&qc_code='.$qc_code)?>";
+		if(new1==new2){
+			$.getJSON("<?php echo base_url('doctor/doResetCode?open_id='.$open_id.'&qc_code='.$qc_code)?>",{code:raw,newCode:new1},function(msg){
+				if( msg.result_code == 200 ){
+					showPopUpDiv();
+					getAlert({
+						text:msg.info,
+						alert:1
+					},b)
+				}
+				if( msg.result_code == 400 ){
+					showPopUpDiv();
+					getAlert({
+						text:msg.error_msg,
+						alert:0
+					})
+				}
+			})
+		}else{
+			$("#span_new3").show();
+		}
+	}
+	function span_hidden(){
+		$('.span_hidden').hide();
+	}
+</script>
+
+
+
+
+
+
+
+

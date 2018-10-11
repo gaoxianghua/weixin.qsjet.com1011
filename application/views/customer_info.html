@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="<?php echo base_url();?>" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" />
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Expires" CONTENT="0"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta http-equiv="x-rim-auto-match" content="none" /> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>个人信息</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+	<style>
+p{float:left;padding:3% 0 2.2% 2.2%;width:17.5%;text-align:left}
+.sex{width:81.5%;border:none;padding-top: 3%;margin-bottom: -2%;vertical-align: middle;}
+.type{background: url(img/images/up.png) no-repeat 95%;background-size:5%}
+.bingshi{background: url(img/images/up.png) no-repeat 100%;background-size:4.5%}
+.nan,.nv{margin-left: 5%;color: #333;padding: 0 0% 0 6%;background-size: 50%;}
+.sex .change{background: url(img/images/radioyes.png)no-repeat;background-size: 46%;}
+.selected .span-radio{background: url(img/images/radiono.png) no-repeat 97% center;background-size: 5%;}
+.selected .choose{background:#4E4E4E url(img/images/radioyes.png)no-repeat 97% center;background-size: 5%;}
+.nan{background: url(img/images/radiono.png) no-repeat;}
+.nv{background: url(img/images/radiono.png) no-repeat;}
+input[type=text]{padding:3% 8% 2.4% 3%;}
+.bottom{text-align: center;}
+#popDiv,#popDiv1{background:#595959;width: 80%;top: 20%;}
+.span_hidden{display:none;}
+@media screen and (min-width:320px) and (max-width:375px){.yidaosu{width: 36%}.nan,.nv{background-size:50%;}}
+@media screen and (min-width:376px) and (max-width:414px){.yidaosu{width: 36%}.nan,.nv{background-size:50%;}}
+@media screen and (min-width:415px) and (max-width:520px){.nan,.nv{background-size:50%;}.yidaosu{width: 35%}}
+@media screen and (min-width:521px) and (max-width:639px){.nan,.nv{background-size:50%;}.yidaosu{width: 28%}}
+@media screen and (min-width:640px) and (max-width:719px){.nan,.nv{background-size:44%;}.yidaosu{width: 32%}}
+@media screen and (min-width:720px) and (max-width:749px){.yidaosu{width: 33%}}
+@media screen and (min-width:750px) and (max-width:799px){.yidaosu{width: 33%}}
+@media screen and (min-width:800px)and (max-width:1023px){.nan,.nv{background-size:42%;}.yidaosu{width: 29%}}
+@media screen and (min-width:1024px)and (max-width:1920px){.btn-bd{margin-bottom:5%}.nan,.nv{background-size:43%;}.yidaosu{width: 23%}}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div class="middle">
+			<ul>
+				<li class="li_first"><p>姓名</p><span style="float:right;margin-top:10px;margin-right:10px;"><?php echo isset($customerInfo['username'])?$customerInfo['username']:'';?></span><br></li>
+				<li><p>身份</p><span style="float:right;margin-top:10px;margin-right:10px;">客户</span><br></li>
+				<li><p>手机号码</p><span style="float:right;margin-top:10px;margin-right:10px;"><?php echo isset($customerInfo['mobile'])?$customerInfo['mobile']:'';?></span><br></li>
+			</ul>	
+		</div>
+		<div class="bottom">
+		</div>
+	</div>
+</body>
+</html>

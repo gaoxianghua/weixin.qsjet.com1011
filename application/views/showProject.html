@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="<?php echo base_url();?>" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+	<META HTTP-EQUIV="Expires" CONTENT="0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta http-equiv="x-rim-auto-match" content="none" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>产品注册</title>
+	<link rel="stylesheet" href="css/styles.css" />
+	<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/alert.js"></script>
+	<script type="text/javascript" src="js/loading.js"></script>
+	<script src="js/city.js"></script>
+	<style>
+		p{float:left;padding:3% 0 2.2% 2.2%;text-align:left}
+		input[type=text]{padding:3.5% 8% 2.4% 3%;}
+		input[type=password]{padding:3% 8% 2.4% 3%;}
+		.span_hidden{display:none;}
+		#popDiv,#popDiv1{background:#595959;width: 80%;top: 20%;}
+		.btn-bd{margin-top: 10%;}
+		.bottom a{display: inline-block;margin-top: 3%;}
+		.forgetPw{margin-left: 3%;}
+		.register{float: right;margin-right: 3%;color: rgb(11, 142, 241)}
+		.image{
+			margin:0 auto;
+			width:auto;
+			text-align:center;
+		}
+	</style>
+
+	<script type="text/javascript">
+        $(document).ready(function(){
+            $('#mySelect').change(function(){
+                var p1=$(this).children('option:selected').val();
+                if(p1 == 'QB-P智能药盒'){
+                    $("#checkboxs").hide();
+                    $("#t1").hide();
+                    $("#t2").hide();
+                } else if(p1 == 'QS-M无针注射器'){
+                    $("#checkboxs").hide();
+                    $("#t1").hide();
+                    $("#t2").hide();
+                }else{
+					//清空选中
+                    //$("#ckx").empty();
+                    $("#ckx").attr("checked",false);
+                    document.getElementById('checkboxs').style.display='block';
+                    $("#t1").show();
+                    $(document).ready(function(){
+                        $('#ckx').change(function(){
+                            if($('#ckx').is(':checked')) {
+                                $("#t1").hide();
+                                $("#t2").show();
+                            } else{
+                                $("#t2").hide();
+                                $("#t1").show();
+                            }
+                        })
+                    })
+				}
+            })
+        });
+        $(document).ready(function(){
+            $('#ckx').change(function(){
+                if($('#ckx').is(':checked')) {
+                    $("#t1").hide();
+                    $("#t2").show();
+
+                } else{
+                    $("#t2").hide();
+                    $("#t1").show();
+                }
+            })
+        })
+
+	</script>
+</head>
+<body>
+<div id="container">
+	<div class="middle">
+		<ul>
+			<li><p style="width: 25%;">产品类型</p>
+				<select class="project_type" id="mySelect" style="margin-top:3%;">
+					<option value="QS-P无针注射器" selected>QS-P无针注射器</option>
+					<option value="QS-M无针注射器">QS-M无针注射器</option>
+					<!--<option value="QB-P智能药盒">QB-P智能药盒</option>-->
+				</select>
+				<!--<img  style='margin-top:15px;width:5%;' src='img/images/up.png'><br>-->
+			</li>
+			<li class="li_last"><p style="width: 25%;">产品注册码</p><input type="text" class="project_num" maxlength=16  name="project_num" placeholder="请输入16位纯数字" onfocus='span_hidden()' /><br></li>
+			<span id="span_project_num" class='span_hidden'><font color='red' size='1'>产品编号输入有误！</font></span>
+			<li class="li_last"><p style="width: 25%;">验证码</p><input type="text"  style="width: 45%;" id="verify" name="verify" maxlength="4"  autocomplete="off"  onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" /><a href="javascript:reloadCode();">
+				<img src="<?php echo base_url('captcha_code/verify_image');?>" name="checkCodeImg" id="checkCodeImg" border="0" /></a><br></li>
+		</ul>
+		<br/>
+		<span style="margin-left: 6%;" id="checkboxs"><input type="checkbox" name="free" id="ckx" value="1" style="-webkit-appearance: checkbox;">免费领取QS-P专用便携保护盒</span>
+		<ul id="t1">
+			<li class="li_last"><p style="width: 25%;"><font color="#999">收件人*</font></p><br></li>
+			<li class="li_last"><p style="width: 25%;"><font color="#999">收件人电话*</font></p><br></li>
+			<li class="li_last"><p style="width: 25%;"><font color="#999">邮寄地址*</font></p><br></li>
+			<li style="background-color: #efefef;border-bottom: none;"><p style="font-size:13px;"><font color="#999">*提交后快舒尔客服将通过电话与您核对邮寄信息 请留意接听</font></p>
+			</li>
+			<li style="background-color: #efefef;border-top: none;"><p style="font-size:13px;"><font color="#999">*无针注射器保护盒将在9月中旬陆续发出</font></p></li>
+		</ul>
+		<ul style="display:none;" id="t2">
+			<li class="li_last"><p style="width: 25%;">收件人<font color="red">*</font></p><input type="text"  class="ename" maxlength=16  name="ename" onfocus='span_hidden()' /><br></li>
+			<span id="idename" class='span_hidden'><font color='red' size='1'>请输入收件人姓名！</font></span>
+			<li class="li_last" style="border-bottom: solid 1px #c0c0c0"><p style="width: 25%;">收件人电话<font color="red">*</font></p><input type="text"  class="ephone" maxlength=11  name="ephone" placeholder="" onfocus='span_hidden()' /></li>
+			<span id="idephone" class='span_hidden'><font color='red' size='1'>请输入正确的手机号！</font></span>
+			<li class="li_first"><p style="width: 22%;">省/市<font color="red">*</font></p>
+				<div style="margin-top: 3%;">
+					<select id="province" name="pro"></select>
+					<select id="city" name="city"></select>
+				</div>
+				<script>
+                    (function(){
+                        var pHtmlStr = '';
+                        for(var name in pc){
+                            pHtmlStr = pHtmlStr + '<option>'+name+'</option>';
+                        }
+                        $("#province").html(pHtmlStr);
+                        $("#province").change(function(){
+                            var pname = $("#province option:selected").text();
+                            var pHtmlStr = '';
+                            var cityList = pc[pname];
+                            for(var index in cityList){
+                                pHtmlStr = pHtmlStr + '<option>'+cityList[index]+'</option>';
+                            }
+                            $("#city").html(pHtmlStr);
+                        });
+                        $("#province").change();
+                    })();
+				</script>
+				</li>
+			<li class="li_last"><p style="width: 25%;">邮寄地址<font color="red">*</font></p><input type="text"  class="eaddress" name="eaddress" placeholder="请您输入详细的邮寄地址" onfocus='span_hidden()' /><br></li>
+			<span id="ideaddress" class='span_hidden'><font color='red' size='1'>请输入详细收货地址！</font></span>
+			<li style="background-color: #f0f0f0;"><p style="font-size:13px;"><font color="red">*</font>提交后快舒尔客服将通过电话010-56592336与您核对邮寄信息&nbsp; 请留意接听</p>
+			</li>
+			<li style="background-color: #f0f0f0;border-top: none;"><p style="font-size:13px;"><font color="red">*</font>无针注射器保护盒将在9月中旬陆续发出</p></li>
+		</ul>
+
+	</div>
+	<div class="bottom">
+		<span class="tip"></span>
+		<input type="button" value="提交" class="btn-bd">
+	</div>
+</div>
+
+<div class="image" style="margin-top: 20%;">
+	<img style="width: 320px;height: auto;" src="img/images/newinfo.png" />
+</div>
+<div id="bg" class="bg" style="display:none;"></div>
+<br />
+</body>
+</html>
+<script>
+    $(function(){
+        reloadCode();
+        loading();
+        $(".project_type").click(function(){
+            showdiv1();
+            $(".selected").show();
+        });
+        $(".priject_type_sele span").click(function(){
+            bingli();
+            $(this).addClass("choose");
+            $(".project_type").val($(this).text());
+        });
+    });
+    function bingli(){
+        $(".priject_type_sele span").each(function() {
+            if ($(this).hasClass("choose")) {
+                $(this).removeClass("choose");
+            }
+            closediv();
+        });
+    }
+    function showdiv1(){
+        document.getElementById('popDiv1').style.display='block';
+        document.getElementById('bg').style.display='block';
+    }
+    function closediv(){
+        document.getElementById('bg').style.display='none';
+        document.getElementById('popDiv1').style.display='none';
+    }
+
+    function reloadCode(){
+        var dom = document.getElementById("checkCodeImg");
+        dom.src = "<?php echo base_url('captcha_code/verify_image?str=');?>" + Math.random();
+    }
+
+    $(".btn-bd").click(function(){
+        loading();
+        var project_type=$(".project_type").val();
+        //var project_type= obj.options[index].value;
+        var project_num=$(".project_num").val();
+        var verify=$("#verify").val();
+        var ename=$(".ename").val();
+        var ephone=$(".ephone").val();
+        var eaddress=$(".eaddress").val();
+        var eaddpro=$("#province").val();
+        var eaddcity=$("#city").val();
+        var REG_NUM = /^\d{16}$/ ;
+        var CHECK_NUM = /^13[0-9]{1}[0-9]{8}$|15[0-9]{1}[0-9]{8}$|18[0-9]{9}|14[0-9]{1}[0-9]{8}|17[0-9]{1}[0-9]{8}$/;
+        if(project_type=='' ){
+            $('#span_project_type').show();
+            return false;
+        }
+        if(project_num ==''|| !REG_NUM.test(project_num)){
+            $('#span_project_num').show();
+            return false;
+        }
+
+        if(project_type=='QS-M无针注射器' || project_type=='QB-P智能药盒'){
+            $.ajax({
+                url:"<?php echo base_url('register_project/doUserProject?token='.$token);?>",
+                data:{
+                    project_type:project_type,
+                    project_num:project_num,
+                    verify:verify,
+                },
+                type:'post',
+                cache:false,
+                dataType:'json',
+                success:function(data){
+                    closeload();
+                    //一般提交成功
+                    if( data.result_code == '200' ){
+                        showPopUpDiv();
+                        getAlert({
+                            text:data.info,
+                            alert:1
+                        },"<?php echo base_url('user?redirect_url=success_project&token='.$token);?>")
+                        return false;
+                    }
+                    //从其他页面进入的提交页
+                    if( data.result_code == '300' ){
+                        showPopUpDiv();
+                        getAlert({
+                            text:data.info,  //文本可修改，可加参数
+                            alert:1	     	  //参数可修改 0,1,2
+                        },data.url)
+                        return false;
+                    }
+                    //提交失败
+                    if( data.result_code == '400' ){
+                        showPopUpDiv();
+                        getAlert({
+                            text:data.error_msg,  //文本可修改，可加参数
+                            alert:0	     	  //参数可修改 0,1,2
+                        })
+                        return false;
+                    }
+                    console.log(data);
+                    //产品编号验证失败
+                    if( data.result_code == '401' ){
+                        showPopUpDiv();
+                        getAlert({
+                            text:data.error_msg,  //文本可修改，可加参数
+                            alert:0	     	  //参数可修改 0,1,2
+                        })
+                        $(".popUp-body").css({"margin":"10%","margin-bottom":"0px"});
+                        $(".alertDiv .alert-text").css("line-height","19px");
+                        return false;
+                    }
+                },
+                error : function() {
+                    closeload();
+                    showPopUpDiv();
+                    getAlert({
+                        text:"请检查网络是否畅通",
+                        alert:0
+                    });
+                }
+            });
+
+        }
+        //-----pppppp---------------//
+        if(project_type=='QS-P无针注射器'){
+            if($("input[name='free']").prop("checked") ==true){
+                //已经勾选
+                if(ename==''|| ename == null ){
+                    $('#idename').show();
+                    return false;
+                }
+                if(ephone==''|| !CHECK_NUM.test(ephone) ){
+                    $('#idephone').show();
+                    return false;
+                }
+                if(eaddress==''|| eaddress == null ){
+                    $('#ideaddress').show();
+                    return false;
+                }
+                $.ajax({
+                    url:"<?php echo base_url('register_project/doUserProject?token='.$token);?>",
+                    data:{
+                        project_type:project_type,
+                        project_num:project_num,
+                        ename:ename,
+                        ephone:ephone,
+                        eaddress:eaddress,
+                        eaddpro:eaddpro,
+                        eaddcity:eaddcity,
+                        verify:verify,
+                    },
+                    type:'post',
+                    cache:false,
+                    dataType:'json',
+                    success:function(data){
+                        closeload();
+                        //一般提交成功
+                        if( data.result_code == '200' ){
+                            showPopUpDiv();
+                            getAlert({
+                                text:data.info,
+                                alert:1
+                            },"<?php echo base_url('user?redirect_url=success_project&token='.$token);?>")
+                            return false;
+                        }
+                        //从其他页面进入的提交页
+                        if( data.result_code == '300' ){
+                            showPopUpDiv();
+                            getAlert({
+                                text:data.info,  //文本可修改，可加参数
+                                alert:1	     	  //参数可修改 0,1,2
+                            },data.url)
+                            return false;
+                        }
+                        //提交失败
+                        if( data.result_code == '400' ){
+                            showPopUpDiv();
+                            getAlert({
+                                text:data.error_msg,  //文本可修改，可加参数
+                                alert:0	     	  //参数可修改 0,1,2
+                            })
+                            return false;
+                        }
+                        console.log(data);
+                        //产品编号验证失败
+                        if( data.result_code == '401' ){
+                            showPopUpDiv();
+                            getAlert({
+                                text:data.error_msg,  //文本可修改，可加参数
+                                alert:0	     	  //参数可修改 0,1,2
+                            })
+                            $(".popUp-body").css({"margin":"10%","margin-bottom":"0px"});
+                            $(".alertDiv .alert-text").css("line-height","19px");
+                            return false;
+                        }
+                    },
+                    error : function() {
+                        closeload();
+                        showPopUpDiv();
+                        getAlert({
+                            text:"请检查网络是否畅通",
+                            alert:0
+                        });
+                    }
+                });
+
+            }else if($("input[name='free']").prop("checked")==false){
+                //alert("请勾选按钮");
+                var truth = window.confirm("您确定不领取无针注射器保护盒吗？");
+                if(truth){
+                    $.ajax({
+                        url:"<?php echo base_url('register_project/doUserProject?token='.$token);?>",
+                        data:{
+                            project_type:project_type,
+                            project_num:project_num,
+                            verify:verify,
+                        },
+                        type:'post',
+                        cache:false,
+                        dataType:'json',
+                        success:function(data){
+                            closeload();
+                            //一般提交成功
+                            if( data.result_code == '200' ){
+                                showPopUpDiv();
+                                getAlert({
+                                    text:data.info,
+                                    alert:1
+                                },"<?php echo base_url('user?redirect_url=success_project&token='.$token);?>")
+                                return false;
+                            }
+                            //从其他页面进入的提交页
+                            if( data.result_code == '300' ){
+                                showPopUpDiv();
+                                getAlert({
+                                    text:data.info,  //文本可修改，可加参数
+                                    alert:1	     	  //参数可修改 0,1,2
+                                },data.url)
+                                return false;
+                            }
+                            //提交失败
+                            if( data.result_code == '400' ){
+                                showPopUpDiv();
+                                getAlert({
+                                    text:data.error_msg,  //文本可修改，可加参数
+                                    alert:0	     	  //参数可修改 0,1,2
+                                })
+                                return false;
+                            }
+                            console.log(data);
+                            //产品编号验证失败
+                            if( data.result_code == '401' ){
+                                showPopUpDiv();
+                                getAlert({
+                                    text:data.error_msg,  //文本可修改，可加参数
+                                    alert:0	     	  //参数可修改 0,1,2
+                                })
+                                $(".popUp-body").css({"margin":"10%","margin-bottom":"0px"});
+                                $(".alertDiv .alert-text").css("line-height","19px");
+                                return false;
+                            }
+                        },
+                        error : function() {
+                            closeload();
+                            showPopUpDiv();
+                            getAlert({
+                                text:"请检查网络是否畅通",
+                                alert:0
+                            });
+                        }
+                    });
+		}
+            }
+        }
+    });
+    showload();
+    function span_hidden(){
+        $('.span_hidden').hide();
+    }
+</script>

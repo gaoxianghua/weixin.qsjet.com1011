@@ -1,0 +1,619 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" /> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta http-equiv="x-rim-auto-match" content="none" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+  <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+  <META HTTP-EQUIV="Expires" CONTENT="0"> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>21天卡</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/echarts.min.js"></script>
+  <script type="text/javascript" src="js/alert.js"></script>
+  <script type="text/javascript" src="js/loading.js"></script>
+	<style type="text/css">
+		.top{width: 100%;background-color: #fff;overflow: hidden;}
+		.top-left{float: left;margin:2% 0 2% 2%;}
+		.top-right{float: right;margin:2% 6% 1% 2%;width: 25%;}
+		.top-left i{display: inline-block;width: 20px;height: 15px;}
+		.top-right i{display: inline-block;width: 30px;height: 30px;}
+		.left-icon-a{background: url(img/images/create.png) no-repeat 0 center;display:none;background-size:80%;}
+		.left-icon-l{background: url(img/images/left.png) no-repeat 0 center;}
+		.left-icon-r{background: url(img/images/right.png) no-repeat 0 center;}
+		.right-icon-l{background: url(img/images/input.png) no-repeat 0 center;}
+		.right-icon-r{background: url(img/images/delete.png) no-repeat 0 center;}
+		.left-icon-l,.left-icon-r{background-size: 54%;}
+		.top-left input[type=text]{float: none;padding: 3% 0;text-align: center;}
+		.mid,.bottom{background: #fff;margin-top: 4%;}
+		#popDiv,#popDiv1{border-radius: 6px;padding:4%;}
+		#popDiv1 .btn-bd{width: 30%;margin-top: 7%;}
+		.btn-bd{width: 30%;font-size: 14px;padding:2.5% 1.5% 1.5% 1.5%}
+		.anniu{width: 80%;margin: 2% auto 0; text-align: center;}
+@media screen and (min-width:320px) and (max-width:359px){html{font-size:15px}.top-left input[type=text]{margin-left: -4.3%;width:90%;}.left-icon-l,.left-icon-r{background-position: 0 3px;}.top-left{margin: 1.5% 0 1.5% 1.5%;width: 70%;}.right-icon-l{margin-right: 5%;}.top-right{margin:2% -4.5% 1% 2%;width: 27%;}.right-icon-l,.right-icon-r{background-size: 60%;}.top-left input[type=text]{width: 78.5%}}
+@media screen and (min-width:360px) and (max-width:375px){html{font-size:15px}.top-left input[type=text]{margin-left: -4.3%;}.left-icon-l,.left-icon-r{background-position: 0 3px;}.top-left{margin: 1.5% 0 1.5% 3%;}.right-icon-l{margin-right: 15%;}.top-right{margin:2% -1% 1% 2%;}.right-icon-l,.right-icon-r{background-size: 60%;}.top-left input[type=text]{width: 81%}}
+@media screen and (min-width:376px) and (max-width:414px){html{font-size:16px}.top-left input[type=text]{margin-left: -4.3%;}.left-icon-l,.left-icon-r{background-position: 0 3px;}.top-left{margin: 1.5% 0 1.5% 3%;}.right-icon-l{margin-right: 20%;}.top-right{margin:2% 2.5% 1% 2%;}.right-icon-l,.right-icon-r{background-size: 65%;}.top-left input[type=text]{width: 82%}}
+@media screen and (min-width:415px) and (max-width:510px){html{font-size:18px}.top-left input[type=text]{margin-left: -3.5%;}.left-icon-l,.left-icon-r{background-position: 0 3px;}.top-left{margin: 1.5% 0 1.5% 4%;}.right-icon-l{margin-right: 30%;}.top-right{margin:2% 3% 1% 2%;}.right-icon-l,.right-icon-r{background-size: 75%;}.top-left input[type=text]{width: 83%}}
+@media screen and (min-width:511px) and (max-width:639px){html{font-size:18px}.top-left input[type=text]{margin-left: -3.5%;}.left-icon-l,.left-icon-r{background-position: 0 3px;}.top-left{margin: 1.5% 0 1.5% 8%;}.right-icon-l{margin-right: 40%;}.top-right{margin:2% 6.5% 1% 0%;}.right-icon-l,.right-icon-r{background-size: 80%;}.top-left input[type=text]{width: 84%}}
+@media screen and (min-width:640px) and (max-width:719px){html{font-size:21px}.top-left input[type=text]{margin-left: -3.5%;}.top-left{margin: 1.5% 0 1% 8%;}.right-icon-l{margin-right: 40%;}.top-right{margin:2% 7.5% 1% 2%;}.right-icon-l,.right-icon-r{background-size: 90%;}.top-left input[type=text]{width: 86%}}
+@media screen and (min-width:720px) and (max-width:799px){html{font-size:24px}.top-left input[type=text]{margin-left: -3%;}.top-left{margin: 1.5% 0 1% 8.5%;}.right-icon-l{margin-right: 50%;}.top-right{margin:2% 8% 1% 2%;}.right-icon-l,.right-icon-r{background-size: 100%;}.top-left input[type=text]{width: 87%}}
+@media screen and (min-width:800px)and (max-width:1023px){html{font-size:25px}.top-left input[type=text]{margin-left: -3%;}.top-left{margin: 1.5% 0 1% 9%;}.right-icon-l{margin-right: 60%;}.top-right{margin:2% 10% 1% 2%;}.right-icon-l,.right-icon-r{background-size: 100%;}.top-left input[type=text]{width: 88%}}
+@media screen and (min-width:1024px)and (max-width:1920px){html{font-size:25px}.btn-bd{margin-bottom:5%}.top-left input[type=text]{margin-left: -3%;}.top-left{margin: 1.5% 0 1% 9.5%;}.right-icon-l{margin-right: 70%;}.top-right{margin:2% 11.5% 1% 2%;}.right-icon-l,.right-icon-r{background-size: 100%;}.top-left input[type=text]{width: 89%}}
+	</style>
+	</head>
+	<body>
+		<div id="container">
+			<div class="top">
+				<div class="top-left">
+					<i class="left-icon-l"></i><input type="text" readonly="readonly" class="datetime" /><i class="left-icon-r"></i>
+				</div>
+				<div class="top-right">
+					<i class="left-icon-a"></i>
+					<i class="right-icon-l create"></i>
+					<i class="right-icon-r delete"></i>
+				</div>
+			</div>	
+			<div class="mid">
+				 <div id="main" style="width: 100%;height:280px;"></div>
+			</div>
+			<div class="bottom">
+				 <div id="main2" style="width: auto;height:280px;"></div>
+			</div>
+			
+		</div>
+		<div id="bg" class="bg" style="display:none;"></div>
+		<div id="popDiv" class="mydiv" style="display:none;">
+			<p style="text-align: center;margin-top:3%;font-weight: bold;">您即将要删除21天卡</p>
+			<p style="margin-top: 3%;text-align: center;">删除此21天卡将会清除此前录入的所有数据，需要您重新创建21天卡新周期并录入数据</p>
+			<div class="anniu">
+				<input type="button" value="取消" class="btn-bd quxiao"/>
+				<input type="button" value="确认" class="btn-bd enter" style="background: #FF645B;"/>
+			</div>
+		</div>
+		<div id="popDiv1" class="mydiv1" style="display:none;">
+			<p style="text-align: center;margin-top:3%;font-weight: bold;">请创建新的21天卡</p>
+            <br>
+            <div class="anniu">
+                <span><input type="button" value="取消" class="btn-bd quxiao"/><input type="button" value="确认" class="btn-bd createenter" style="background: #FF645B;"/></span>
+            </div>
+		</div>
+ <script type="text/javascript">
+ 		//获取当前时间戳
+		function getNowTime(){ 
+		     return  Date.parse(new Date());
+		} 
+		//获取最大时间戳
+		function getMaxTime(stringTime){ 
+			return Date.parse(new Date(stringTime)) + 24*60*60*1000 ;
+		}
+      	$(function(){
+      		loading();
+          $('.left-icon-r').css('visibility','hidden');
+          $('.left-icon-l').css('visibility','hidden');
+			$('.left-icon-a').hide();
+     		$.ajax({
+        			type:"get",
+        			url:"days_card/getCardsList?open_id=<?php echo $open_id?>",
+        			data:{ }, 
+     				cache:false,  
+     				dataType:'json',  
+     				success:function(data){
+     		    		var info=data.info;
+	     		    	for(var i in info ){
+	     					var datetime =info[i].start_time+"—"+info[i].end_time;
+	     				}
+                        if(info.length>1){
+                             $('.left-icon-l').css('visibility','visible');
+                        }
+	     		    	//最新21天 开始结束时间
+	     		    	starttime=info[i].start_time;
+		     			endtime=info[i].end_time;
+                        ids = info[i].id;
+                        getData(ids)
+		     			if(getNowTime() > getMaxTime(endtime)){
+		     				$('.right-icon-l').hide();
+		     				$('.left-icon-a').show();	     				
+	     					showdiv1();
+	     					
+	     				}
+	     				var starttime=new Date(starttime);
+						for(j=0; j<21; j++) {
+  							option.xAxis.data[j]=starttime.getDate();
+  							option2.xAxis.data[j]=starttime.getDate();
+ 							starttime.setDate(starttime.getDate() + 1);	
+						}	
+						myChart.hideLoading();
+                   		myChart.setOption(option);
+                        myChart2.setOption(option2);
+                        $(".datetime").val(datetime);
+                   
+                   		//左
+		     			$('.left-icon-l').click(function(){
+                       		$('.right-icon-l').css('visibility','hidden');
+                            $('.left-icon-r').css('visibility','visible');
+		     				datetime=info[i-1].start_time+"—"+info[i-1].end_time;
+		     				starttime=info[i-1].start_time;
+			     			endtime=info[i-1].end_time;
+                            ids=info[i-1].id;
+			     			var starttime=new Date(starttime);
+		     				for(j=0; j<21; j++) {
+	  							option.xAxis.data[j]=starttime.getDate();
+	  							option2.xAxis.data[j]=starttime.getDate();
+	 							starttime.setDate(starttime.getDate() + 1);	
+	                   			myChart.setOption(option);
+	                   			myChart2.setOption(option2);
+							}
+		     				$(".datetime").val(datetime);
+		     				i-=1;
+		     					$('.left-icon-r').css('visibility','visible');
+		     				if(i==0){
+		     					$('.right-icon-l').css('visibility','hidden');
+		     					$('.left-icon-l').css('visibility','hidden');
+		     				}
+		     				getData(ids)
+		     			});
+		     	
+		     			//右
+	     				$('.left-icon-r').click(function(){
+	     				if(info.length-i==2){
+                            $('.right-icon-l').css('visibility','visible');
+	     				}
+	     				ids=info[i+1].id;
+	     				datetime=info[i+1].start_time+"—"+info[i+1].end_time;
+	     				starttime=info[i+1].start_time;
+		     			endtime=info[i+1].end_time;
+		     			var starttime=new Date(starttime);		
+	     				for(j=0; j<21; j++) {
+  							option.xAxis.data[j]=starttime.getDate();
+  							option2.xAxis.data[j]=starttime.getDate();
+ 							starttime.setDate(starttime.getDate() + 1);
+                   			myChart.setOption(option);
+                   			myChart2.setOption(option2);
+						}
+	     				$(".datetime").val(datetime);
+	     				i+=1;
+	     				if(i>0){
+	     				$('.left-icon-l').css('visibility','visible');
+	     				}
+	     				if(i==info.length-1){
+	     					$('.left-icon-r').css('visibility','hidden');
+		                getData(ids);
+		                if(getNowTime() > getMaxTime(endtime) ){
+		                      showdiv1();
+		                }
+	     				}else{
+	     						$('.left-icon-r').css('visibility','visible');
+                      getData(ids);
+	     				}
+	     				
+	     			});
+     		 		}, 
+      		  error : function() {  
+          		showPopUpDiv();
+                getAlert({
+                    text:"数据获取失败",
+                    alert:0
+                })
+      		 		}  
+        		});
+     	function getData(ids){
+     		$.ajax({
+    			type:"get",
+    			url:"days_card/getCardsDataList?open_id=<?php echo $open_id?>",
+    			data:{id:ids}, 
+ 				cache:false, 
+ 				dataType:'json',  
+ 				success:function(data){
+ 		    		var info=data.info;
+ 		    		
+                    var sugar_morning_info = [,,,,,,,,,,,,,,,,,,,,,];
+                    var sugar_noon_info = [,,,,,,,,,,,,,,,,,,,,,];
+                    var sugar_night_info =[,,,,,,,,,,,,,,,,,,,,,];
+                    var pressure_morning_info = [,,,,,,,,,,,,,,,,,,,,,];
+                    var pressure_noon_info = [,,,,,,,,,,,,,,,,,,,,,];
+                    var pressure_night_info = [,,,,,,,,,,,,,,,,,,,,,];
+					if(info == ''){
+						option.series[0].data=[,,,,,,,,,,,,,,,,,,,,,];
+     					option.series[1].data=[,,,,,,,,,,,,,,,,,,,,,];
+     					option.series[2].data=[,,,,,,,,,,,,,,,,,,,,,];
+     					option2.series[0].data=[,,,,,,,,,,,,,,,,,,,,,];
+     					option2.series[1].data=[,,,,,,,,,,,,,,,,,,,,,];
+     					option2.series[2].data=[,,,,,,,,,,,,,,,,,,,,,];
+					}else{
+	     		    	for(var i = 0; i < info.length; i++) {
+	     		    		var days_time=new Date(info[i].days_time);	
+	 		    			var day_str=days_time.getDate();
+	     		    		if(day_str!=option.xAxis.data[i]){
+	     		    			i=i+1;
+	     		    			sugar_morning_info[i] = info[i-1].sugar_morning;
+	                            sugar_noon_info[i] = info[i-1].sugar_noon;
+	                            sugar_night_info[i] = info[i-1].sugar_night;
+	                            pressure_morning_info[i] = info[i-1].pressure_morning;
+	                            pressure_noon_info[i] = info[i-1].pressure_noon;
+	                            pressure_night_info[i] = info[i-1].pressure_night; 
+	     		    		}else{
+	     		    			var nowdate=new Date();
+			     		    	d=nowdate.getDate();
+			     		    	if(d==option.xAxis.data[i]){
+			     		    		option.xAxis.data[i]={value:option.xAxis.data[i],textStyle:{color:'#f00'}};
+		                       		option2.xAxis.data[i]={value:option2.xAxis.data[i],textStyle:{color:'#f00'}};
+	     		    			}
+	     		    			sugar_morning_info[i] = info[i].sugar_morning;
+	                            sugar_noon_info[i] = info[i].sugar_noon;
+	                            sugar_night_info[i] = info[i].sugar_night;
+	                            pressure_morning_info[i] = info[i].pressure_morning;
+	                            pressure_noon_info[i] = info[i].pressure_noon;
+	                            pressure_night_info[i] = info[i].pressure_night;
+	     		    		}
+                         
+                        }
+	     		    	var nowdate=new Date();
+	     		    	d=nowdate.getDate();
+	     		    	if(d==option.xAxis.data[i]){
+	     		    		option.xAxis.data[d]={value:option.xAxis.data[d],textStyle:{color:'#f00'}};
+                       		option2.xAxis.data[d]={value:option2.xAxis.data[d],textStyle:{color:'#f00'}};
+	     		    	}
+	     		    	
+                            option.series[0].data = sugar_morning_info;
+                            option.series[1].data = sugar_noon_info;
+                            option.series[2].data = sugar_night_info;
+                            option2.series[0].data = pressure_morning_info;
+                            option2.series[1].data = pressure_noon_info;
+                            option2.series[2].data = pressure_night_info;
+
+					}
+     				 myChart.hideLoading();
+               		 myChart.setOption(option);
+               		 myChart2.setOption(option2);
+ 		 		}, 
+  		    	error : function() {  
+      				showPopUpDiv();
+                        getAlert({
+                            text:"周期获取失败",
+                            alert:0
+                        })
+  		 		}  
+    		});
+     	}	
+        		
+            //删除层
+      	    $(".delete").click(function(){
+        		showdiv();
+        	});
+            //关闭所有层
+            $(".quxiao").click(function(){
+                closediv();
+            });
+          //添加21天艾克
+            $('.left-icon-a').click(function(){
+            	location.href="<?php echo base_url('days_card/showInsertCards?open_id='.$open_id)?>";
+            })
+            //删除确认
+        	$(".enter").click(function(){
+        		closediv();
+        		showload();
+        		$.ajax({
+        			type:"get",
+        			url:"<?php echo base_url('days_card/delete?open_id='.$open_id)?>",
+        			data:{  
+						id:ids
+     		 	  	}, 
+     				cache:false,  
+     				dataType:'json',  
+     				success:function(data){
+     					closeload();
+	     		    	
+                		showPopUpDiv();
+               			getAlert({
+                 			text:"删除成功",
+                  			alert:2
+               			})
+              
+     		 		}, 
+      		    	error : function() {
+      		    		closeload(); 
+          				showPopUpDiv();
+                  			getAlert({
+                    		text:"删除周期失败",
+                    		alert:0
+                  		})
+      		 		}  
+        		});
+        	});
+            //new 21 确定
+            $(".createenter").click(function(){
+				window.location="<?php echo base_url('days_card/showInsertCards?open_id='.$open_id)?>";
+            });
+            //点击录入
+        	$(".create").click(function(){
+        		window.location="days_card/showInsertDataCards?open_id=<?php echo $open_id?>&id="+ids;
+        	});
+        });
+   // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    var myChart2 = echarts.init(document.getElementById('main2'));
+    // 指定图表的配置项和数据
+    var option = {
+    title: {
+        left:'3%',
+        top:'3%',
+        text: '血糖 (mmol/L)',
+        textStyle:{
+            fontSize:14,
+            fontWeight:'normal'
+        }
+    },  
+    color:['#294367','#4675b3','#fbac5a'],          
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        right:'6%',
+        top:'4%',
+        icon : 'bar',
+        data:['早','中','晚']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        splitLine:{ 
+            show:false
+        },
+            axisLine: {         // 坐标轴线
+            show: true,        // 默认显示，属性show控制显示与否
+            lineStyle: {       // 属性lineStyle控制线条样式
+                color: '#d6d6d6',
+                width: 1,
+                type: 'solid'
+            }
+        },
+        axisTick:{            // 坐标轴小标记
+            show: true,       // 属性show控制显示与否，默认不显示
+            inside : true,    // 控制小标记是否在grid里 
+            interval:0,
+            length :2,         // 属性length控制线长
+            lineStyle: {       // 属性lineStyle控制线条样式
+                color: '#157fd2',
+                width: 1,
+                borderradius:3
+            }
+        },
+          axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+            show: true,
+            rotate: 0,
+            margin: 10,
+            interval:0,
+            textStyle: { 
+                color: '#808080'
+            }
+        },
+        scale:true,
+        boundaryGap: false,
+        data: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21']
+    },
+    yAxis: {
+        type: 'value',
+        min:5,
+        max:21,
+        interval:2,
+               axisLine: {            // 坐标轴线
+            show: false,        // 默认显示，属性show控制显示与否
+        },
+         axisTick: {            // 坐标轴小标记
+            show: false,       // 属性show控制显示与否，默认不显示
+            inside : false,    // 控制小标记是否在grid里 
+        },
+         splitLine: {          // 分隔线
+            show: true,        // 默认显示，属性show控制显示与否
+            lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                color: '#f2f2f2',
+                width: 1,
+                type: 'solid'
+            }
+        },
+        splitNumber:2
+    },
+    series: [
+        {   
+            name:'早',
+            type:'line',
+            itemStyle:{
+                normal:{
+                    lineStyle:{
+                        color:'#294367'
+                    }
+                }
+            },
+            data:[,,,,,,,,,,,,,,,,,,,,,]
+        },
+        {
+            name:'中',
+            type:'line',
+            itemStyle:{
+                normal:{
+                    lineStyle:{
+                        color:'#4675b3'
+                    }
+                }
+            },
+            data:[,,,,,,,,,,,,,,,,,,,,]
+        },
+        {
+            name:'晚',
+            type:'line',
+            itemStyle:{
+                normal:{
+                    lineStyle:{
+                        color:'#fbac5a'
+                    }
+                }
+            },
+            data:[,,,,,,,,,,,,,,,,,,,,]
+        }
+    ]
+};
+
+ // 指定图表的配置项和数据
+    var option2= {
+    title: {
+        left:'3%',
+        top:'3%',
+        text: '注射剂量 (单位)',
+        textStyle:{
+            fontSize:14,
+            fontWeight:'normal'
+        }
+    },  
+    color:['#294367','#4675b3','#fbac5a',],         
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        right: '6%',
+        top:'4%',
+        icon : 'bar',
+        data:['早','中','晚']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        interval:1,
+        splitLine:{ 
+            show:false
+        },
+         axisLine: {            // 坐标轴线
+            show: true,        // 默认显示，属性show控制显示与否
+            lineStyle: {       // 属性lineStyle控制线条样式
+                color: '#d6d6d6',
+                width: 1,
+                type: 'solid'
+            }
+        },
+        axisTick:{            // 坐标轴小标记
+            show: true,       // 属性show控制显示与否，默认不显示
+            inside : true,      // 控制小标记是否在grid里
+            interval:0,
+            length :2,         // 属性length控制线长
+            lineStyle: {       // 属性lineStyle控制线条样式
+                color: '#157fd2',
+                width: 1,
+                borderRadius:"100%"
+            }
+        },
+          axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+            show: true,
+            rotate: 0,
+            margin: 10,
+             interval:0,
+            textStyle: { 
+                color: '#808080'
+            }
+        },
+        scale:true,
+        boundaryGap: false,
+        data: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21']
+    },
+    yAxis: {
+        type: 'value',
+        min:3,
+        max:30,
+        interval:3,
+           axisLine: {            // 坐标轴线
+            show: false,        // 默认显示，属性show控制显示与否
+        },
+         axisTick: {            // 坐标轴小标记
+            show: false,       // 属性show控制显示与否，默认不显示
+            inside : false,    // 控制小标记是否在grid里 
+        },
+         splitLine: {           // 分隔线
+            show: true,        // 默认显示，属性show控制显示与否
+            lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                color: '#f2f2f2',
+                width: 1,
+                type: 'solid'
+            }
+        },
+        splitNumber:1
+    },
+    series: [
+        {   
+            name:'早',
+            type:'line',
+            itemStyle:{
+                normal:{
+                    lineStyle:{
+                        color:'#294367'
+                    }
+                }
+            },
+            data:[,,,,,,,,,,,,,,,,,,,,]
+        },
+        {
+            name:'中',
+            type:'line',
+            itemStyle:{
+                normal:{
+                    lineStyle:{
+                        color:'#4675b3'
+                    }
+                }
+            },
+            data:[,,,,,,,,,,,,,,,,,,,,]
+        },
+        {
+            name:'晚',
+            type:'line',
+            itemStyle:{
+                normal:{
+                    lineStyle:{
+                        color:'#fbac5a'
+                    }
+                }
+            },
+            data:[,,,,,,,,,,,,,,,,,,,,]
+        }
+    ]
+};
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        myChart2.setOption(option2);
+        function showdiv(){
+            document.getElementById('popDiv').style.display='block';
+            document.getElementById('bg').style.display='block';
+        }
+        function showdiv1(){
+            document.getElementById('popDiv1').style.display='block';
+            document.getElementById('bg').style.display='block';
+        }
+        function closediv(){
+            document.getElementById('bg').style.display='none';
+            document.getElementById('popDiv').style.display='none';
+            document.getElementById('popDiv1').style.display='none';
+        }
+    </script>
+    </body>
+</html>

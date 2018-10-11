@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="<?php echo base_url();?>" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" /> 
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Expires" CONTENT="0"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta http-equiv="x-rim-auto-match" content="none" /> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>提交信息</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/alert.js"></script>
+	<script type="text/javascript" src="js/loading.js"></script>
+	<style>
+		p{float:left;padding:3% 0 3% 2.2%;width:12.5%;text-align:left}
+		.sex,.callous{width:81.5%;border:none;padding-top: 3%;margin-bottom: -2%;vertical-align: middle;}
+		.callous i,.sex i{display: inline-block;height:20px;vertical-align: middle;}
+		.bingshi{background: url(img/images/up.png) no-repeat 97%;background-size:6%}
+		.nan,.nv,.yes,.no{background: url(img/images/radiono.png) no-repeat;background-size: contain;margin-left: 5%;color: #333;padding: 0 0% 0 6%;}
+		.sex .change,.callous .change{background: url(img/images/radioyes.png)no-repeat;background-size: contain;}
+		.selected .span-radio{background: url(img/images/radiono.png) no-repeat 97% center;background-size: 5%;}
+		.selected .choose{background:#4E4E4E url(img/images/radioyes.png)no-repeat 97% center;background-size: 5%;}
+		input[type=text]{padding:3.6% 0 2.3% 3%;}
+		.bottom{text-align: center;}
+		#popDiv1{background:#595959;width: 80%;top: 20%;}
+		.span_hidden{display:none;color:#f00;}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div class="middle">
+			<ul>
+				<li class="li_first"><p>姓名</p><input type="text" class="username" maxlength="20" placeholder="请输入您的姓名" onfocus='span_hidden()' ><br></li>
+				<span id="span_username" class='span_hidden'><font size='1'>您输入的姓名有误！</font></span>
+				<li><p>性别</p><div class="sex"><i class="nan" ></i>男<i class="nv"></i>女</div><br></li>
+				<span id="span_sex" class='span_hidden' onfocus='span_hidden()' ><font size='1'>您的性别选择有误！</font></span>
+				<li><p class="yidaosu" style="width: 17%;">胰岛素</p><input type="text" class="insulin" style="width:80%;" onfocus='span_hidden()' placeholder="请输入2-15位中英文数字" ></li>
+				<span id="span_insulin" class='span_hidden'><font size='1'>您输入的胰岛素有误！</font></span>
+				<li><p style="width: 19%;">注射时间</p><input type="text" style="width: 78%;" readonly class="bingshi" placeholder="请选择胰岛素注射时间"  onfocus='span_hidden()' ><br></li>
+				<span id="span_bingshi" class='span_hidden'><font size='1'>您的注射时间选择有误!</font></span>
+				<li><p class="zhushejiliang" style="width: 19%;">注射剂量</p><input type="text" class="jiliang" style="width:63%;" onfocus='span_hidden()' placeholder="请输入注射剂量" ><p>单位</p></li>
+				<span id="span_jiliang" class='span_hidden'><font size='1'>您输入的注射剂量有误！</font></span>
+				<li><p style="width: 19%;">有无硬结</p><div class="callous"><i class="yes" ></i>有<i class="no"></i>无</div><br></li>
+				<span id="span_callous" class='span_hidden' onfocus='span_hidden()' ><font size='1'>请选择是否有硬结！</font></span>
+				<li><p>地址</p><input type="text" class="address" readonly placeholder="请选择地址" onfocus='span_hidden()' ><br></li>
+				<span id="span_address" class='span_hidden'><font size='1'>您输入的地址不正确！</font></span>
+			</ul>	
+		</div>
+		<div class="bottom">
+			<span class="tip"></span>
+			<input type="button" value="提交信息" class="btn-bd">	
+		</div>
+	</div>
+	<div id="bg" class="bg" style="display:none;"></div>
+	<div id="popDiv1" class="mydiv1" style="display:none;">
+		<div class="selected bingshisele">
+			<span class="span-radio">1-3年</span>
+			<span class="span-radio">3-5年</span>
+			<span class="span-radio">5年以上</span>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+		var proStorage = window.localStorage.getItem("pro");
+		var cityStorage = window.localStorage.getItem("city");
+		var gendersStorage = window.localStorage.getItem("gender");
+		var callousStorage = window.localStorage.getItem("callous");
+		if(gendersStorage=='男'){
+			$(".nan").addClass("change");
+		}else if(gendersStorage=='女'){
+			$(".nv").addClass("change");
+		}
+		if(callousStorage=='1'){
+			$(".yes").addClass("change")
+		}else if(callousStorage=='0'){
+			$(".no").addClass("change")
+		}
+		if(proStorage!=null&&cityStorage!=null){
+			$('.address').val(proStorage+cityStorage);
+			window.localStorage.clear("pro");
+			window.localStorage.clear("city");
+		}
+		$('.address').click(function(){
+			var gender,callous;
+			if($(".nan").hasClass("change")){
+				gender="男";
+			}else if($(".nv").hasClass("change")){
+				gender="女";
+			}
+			if($(".yes").hasClass("change")){
+				callous="1";
+			}else if($(".no").hasClass("change")){
+				callous="0";
+			}
+			window.localStorage.setItem("gender",gender);
+			window.localStorage.setItem("callous",callous);
+			location.href="<?php echo base_url('areas/showAreasSelect?open_id='.$open_id);?>";
+		})
+        function showdiv1(){
+            document.getElementById('popDiv1').style.display='block';
+            document.getElementById('bg').style.display='block';
+        }
+        function closediv(){
+            document.getElementById('bg').style.display='none';
+            document.getElementById('popDiv1').style.display='none';
+        }
+		function bingli(){
+			$(".bingshisele span").each(function() {
+        		if ($(this).hasClass("choose")) {
+            		$(this).removeClass("choose");
+       			}
+        		$(".bingshi").css("background-image","url(img/images/up.png)");
+				closediv();
+   			 });
+   			}
+		$(function(){
+			$("body").append('<div id="background" class="background" style="display:none;"></div><div id="loadingdiv" class="loadingdiv" style="display:none;"><img src="../img/images/loading.gif"></div>');
+ 			var $bingshi=$(".bingshi");
+			$(".bingshi").click(function(){
+				showdiv1();
+				$(".selected").show();
+				$(".bingshi").css("background-image","url(img/images/down.png)");
+			});
+			$(".bingshisele span").click(function(){
+    			bingli();
+    			$(this).addClass("choose");
+				$(".bingshi").val($(this).text());
+			});
+			//选择性别
+			$(".sex i").click(function(){
+				$(".span_sex").hide();
+    			$(".sex i").each(function(){
+        		if($(this).hasClass("change")) {
+            		$(this).removeClass("change");
+       			}
+   			 	});
+    			$(this).addClass("change");
+ 			});	
+ 			//是否有硬结
+ 			$(".callous i").click(function(){
+ 				$(".span_callous").hide();
+    			$(".callous i").each(function(){
+        		if($(this).hasClass("change")) {
+            		$(this).removeClass("change");
+       			}
+   			 	});
+    			$(this).addClass("change");
+ 			});	
+ 			
+ 			$(".btn-bd").click(function(){
+ 				//获取表单中的值
+ 				var username=$(".username").val();
+				var gender;
+				var callous;								//硬结
+				var jiliang=$(".jiliang").val();			//剂量
+				var insulin=$(".insulin").val();			//胰岛素
+				var medical_history=$(".bingshi").val();	//注射时间
+				var address=$(".address").val();
+				if($(".nan").hasClass("change")){
+					gender="男";
+				}else if($(".nv").hasClass("change")){
+					gender="女";
+				}
+				if($(".yes").hasClass("change")){
+					callous="1";
+				}else if($(".no").hasClass("change")){
+					callous="0";
+				}
+				//验证
+				var REG_NAMES = /^[\u4e00-\u9fa5a-zA-Z0-9_\.\-\s\·]{1,20}/ ;
+				var REG_GENDER = /^[男女]/;
+				var REG_callous = /^[10]/;
+				var REG_AGE = /^[0-9\.]{1,5}$/;
+				//验证用户名
+	    		if(!REG_NAMES.test(username.trim())){ 
+    				$('#span_username').show();
+					return false;
+				}	
+	    		//性别
+	    		if(!REG_GENDER.test(gender)){ 
+    				$('#span_sex').show();
+					return false;
+				}
+	    		//验证胰岛素、剂量、病史
+	    		if(medical_history.trim() !='' || jiliang.trim() !='' || insulin.trim() !=''  ){
+
+		    		if(!REG_NAMES.test(medical_history.trim())){ 
+	    				$('#span_bingshi').show();
+						return false;
+					}
+		    		if(!REG_NAMES.test(insulin.trim())){ 
+	    				$('#span_insulin').show();
+						return false;
+					}
+		    		if(!REG_AGE.test(jiliang.trim())){ 
+	    				$('#span_jiliang').show();
+						return false;
+					}
+	    		}
+	    		//有无硬结
+	    		if(!REG_callous.test(callous)){ 
+    				$('#span_callous').show();
+					return false;
+				}
+	    		//验证地址
+	    		if(!REG_NAMES.test(address.trim())){ 
+    				$('#span_address').show();
+					return false;
+				}
+	    		window.localStorage.clear("gender");
+				window.localStorage.clear("callous");
+	    		//提交
+	    		showload();		
+				$.ajax({  
+     		 		url:'user/doUserInsert?open_id=<?php echo $open_id; ?>&user_id=<?php echo $user_id; ?>&qc_code=<?php echo isset($qc_code)?$qc_code:'';?>', 
+      				data:{  
+						username:username,
+						gender:gender,
+						injected_dose:jiliang,
+						medical_history:medical_history,
+						insulin:insulin,
+						address:address,
+						is_scleroma:callous,
+     		 	  		},  
+     				type:'post',  
+     				cache:false,  
+     				dataType:'json',  
+     				success:function(data){
+     					closeload();
+     					if( data.result_code == '200' ){
+     						window.location="<?php echo base_url('user/showSuccess?open_id='.$open_id);?>";
+     						return false;
+     					}
+     					if( data.result_code == '201' ){
+     						showPopUpDiv();
+     						getAlert({
+     						    text:data.info,  //文本可修改，可改参数
+     						    alert:1	     	  //参数可修改 0,1,2
+     						},data.redirect)
+     						return false;
+     					}
+     					if( data.result_code == '400' ){
+     						window.location="<?php echo base_url('user/showFaild?open_id='.$open_id.'&status="+data.error_msg+"');?>";
+     						return false;
+     					}
+     		 		}, 
+      		    	error : function() {  
+      		    		closeload();
+      		    		showPopUpDiv();
+     					getAlert({
+     						text:"请检查网络是否畅通",  
+     						alert:0	    	  
+     					});
+      		 		}  
+   				});	
+			});
+			
+		});
+		function span_hidden(){
+				$('.span_hidden').hide();
+		}
+	</script>

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理平台</title>
+<base href="<?php echo base_url()?>">
+<link href="css/admin/bootstrap.css" rel="stylesheet">
+<link href="css/admin/bootstrap-theme.min.css" rel="stylesheet">
+<link href="css/admin/login.css" rel="stylesheet">
+
+</head>
+<body>
+	<div class="login">
+		<div>
+				<img alt="" src="img/images/logo.png" >
+		    </div>
+
+		<hr class="hr_line">
+		<div class="form_form">
+			<div class="form-group">
+				<?php echo isset($errors)?$errors:'';?>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" name="account" id="account"
+					placeholder="邮箱帐号">
+			</div>
+			<div class="form-group">
+				<input type="password" name="password" class="form-control"
+					id="password" placeholder="密码">
+			</div>
+			<div class="form-group text-right">
+				<div class="remember_account checkbox">
+				</div>
+				<input type="button" class="btn btn-primary"  onclick="checkLogin()"
+					id="login" value="登录">
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="js/admin/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	
+	var errs = <?php echo isset($err) ? "'$err'" : '' ; ?> ;
+	$(function(){	
+		if( errs == 'y' ){
+			alert( '登录失败！' );
+		}
+
+		if( errs == 'n' ){
+			alert( '请先登录' );
+		}
+	})
+
+	function checkLogin(){
+			var account = $( '#account' ).val();
+			var password = $( '#password' ).val();			
+			if(  account != '' || password != '' ){
+                       $.getJSON("<?php echo base_url('admin/login/checkLogin')?>",{account:account,password:password},function(msg){
+                    	   	if( msg.result_code == 200 ){
+                    	   		location.href="<?php echo base_url('admin')?>";
+                    	   		return;
+                    	   	}
+                    	   	if( msg.result_code == 400 ){
+                    	   		alert(msg.error_msg)
+                    	   		return;
+                    	   	}
+                       });
+                       return ;
+			}
+			alert( '用户名或密码不能为空' )
+                        return false;
+			
+	}
+</script>

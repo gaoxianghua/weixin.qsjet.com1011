@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="<?php echo base_url();?>" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="x-rim-auto-match" content="none" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>优惠券列表</title>
+    <link rel="stylesheet" href="css/style_mydiscount.css" />
+    <script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/alert.js"></script>
+    <script type="text/javascript" src="js/loading.js"></script>
+    <script src="js/hotcss.js"></script>
+    <style>
+        p{float:left;padding:3% 0 2.2% 2.2%;width:12.5%;text-align:left}
+        input[type=text]{padding:3% 8% 2.4% 3%;}
+        input[type=password]{padding:3% 8% 2.4% 3%;}
+        .bottom a{display: inline-block;margin-top: 3%;}
+    </style>
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+<div id="container">
+
+    <div class="middle" style="width: 94%;margin: 0 auto;margin-top: 4%;margin-left:8%;float: left;">
+        <div style="float: left;width: 20%;height: 20%;">
+            <img style="width: 100%;height:100%;" src="img/coupon/photo.png">
+        </div>
+        <div style="float:right;width: 58%;margin-right: 16%;">
+            <span style="margin-bottom: 4rem;font-size: 0.6rem;">客户姓名：<?php echo isset($result['username'])?$result['username']:'';?></span> <br/>
+            <span style="font-size: 0.6rem;">手&nbsp; 机 号：<?php echo isset($result['mobile'])?$result['mobile']:'';?></span>
+        </div>
+    </div>
+    <div class="bottom" style="float: left;width: 100%;">
+        <?php
+               if($result['status_s'] == 1 && $result['overtime']>time()){
+        $id = $result['id']; $con_code_s = $result['con_code_s'];
+        echo "<div class='one' style='margin: 0 auto;width: 96%;border-radius:12px;-moz-border-radius:12px; '>";
+        echo "<div style=' float:left;width:60%;height:auto;margin-top: 2%;'>";
+            echo "<ul style='margin-top:4%;margin-left: 12%;'>";
+                echo "<li>";
+                    echo "<font color='#ff9b00'>";
+                        echo "<b>";
+                            echo "7天免费试用";
+                            echo "</b>";
+                        echo "</font>";
+                    echo "</li>";
+                echo "<li style='font-size: 0.6rem;'>";
+                    echo "<font color='#a15205'>";
+                        echo "<b>";
+                            echo "兑换码：";
+                            echo $result['con_code_s'];
+                            echo "</b>";
+                        echo "</font>";
+                    echo "</li>";
+                echo "</ul>";
+            echo "</div>";
+        echo "<div style='float:right;width:30%;height:20%;margin-top: 4%;margin-right: 8%;'>";
+            echo "<a href='/ex_account/ex_check?open_id=$open_id&id=$id&con_code_s=$con_code_s&s=兑换'>";
+                echo "<img style='width: 100%;height: 100%;' src='img/coupon/ex_s.png'>";
+                echo "</a>";
+            echo "</div>";
+        echo "</div>";
+        }
+        ?>
+        <!---7天已使用----->
+        <?php
+               if($result['status_s'] == 2){
+            echo "<div class='one' style='margin: 0 auto;width: 96%;border-radius:12px;-moz-border-radius:12px; '>";
+        echo "<div style=' float:left;width:60%;height:auto;margin-top: 2%;'>";
+        echo "<ul style='margin-top:4%;margin-left: 12%;'>";
+            echo "<li>";
+                echo "<font color='#ff9b00'>";
+                    echo "<b>";
+                        echo "7天免费试用";
+                        echo "</b>";
+                    echo "</font>";
+                echo "</li>";
+            echo "<li style='font-size: 0.6rem;'>";
+                echo "<font color='#a15205'>";
+                    echo "<b>";
+                        echo "兑换码：";
+                        echo $result['con_code_s'];
+                        echo "</b>";
+                    echo "</font>";
+                echo "</li>";
+            echo "</ul>";
+        echo "</div>";
+        echo "<div style='float:right;width:30%;height:20%;margin-top: 6%;margin-right: 8%;'>";
+        echo "<img style='width: 100%;height: 100%;' src='img/coupon/exed.png'>";
+        echo "</div>";
+        echo "</div>";
+    }
+    ?>
+    <!---7天试用已过期----->
+    <?php
+     if($result['status_s'] == 1 && $result['overtime']<time()){
+     echo "<div class='one' style='margin: 0 auto;width: 96%;border-radius:12px;-moz-border-radius:12px; '>";
+    echo "<div style=' float:left;width:60%;height:auto;margin-top: 2%;'>";
+    echo "<ul style='margin-top:4%;margin-left: 12%;'>";
+        echo "<li>";
+            echo "<font color='#ff9b00'>";
+                echo "<b>";
+                    echo "7天免费试用";
+                    echo "</b>";
+                echo "</font>";
+            echo "</li>";
+        echo "<li style='font-size: 0.6rem;'>";
+            echo "<font color='#a15205'>";
+                echo "<b>";
+                    echo "兑换码：";
+                    echo $result['con_code_s'];
+                    echo "</b>";
+                echo "</font>";
+            echo "</li>";
+        echo "</ul>";
+    echo "</div>";
+    echo "<div style='float:right;width:30%;height:20%;margin-right:8%;margin-top: 6%;'>";
+    echo "<img style='width:100%;height: 100%;' src='img/coupon/overed.png'>";
+    echo "</div>";
+    echo "</div>";
+}
+?>
+
+</div>
+</div>
+</body>
+<script>
+
+</script>
+</html>

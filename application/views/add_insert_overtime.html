@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="<?php echo base_url();?>" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="x-rim-auto-match" content="none" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>提交信息</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/alert.js"></script>
+    <script type="text/javascript" src="js/loading.js"></script>
+    <style>
+        p{float:left;padding:3% 0 3% 2.2%;width:18.5%;text-align:left}
+        .sex,.callous{width:81.5%;border:none;padding-top: 3%;margin-bottom: -2%;vertical-align: middle;}
+        .callous i,.sex i{display: inline-block;height:20px;vertical-align: middle;}
+        .bingshi{background: url(img/images/up.png) no-repeat 100%;background-size:5%}
+        .nan,.nv,.yes,.no{background: url(img/images/radiono.png) no-repeat;background-size: contain;margin-left: 5%;color: #333;padding: 0 0% 0 6%;}
+        .sex .change,.callous .change{background: url(img/images/radioyes.png)no-repeat;background-size: contain;}
+        .selected .span-radio{background: url(img/images/radiono.png) no-repeat 97% center;background-size: 5%;}
+        .selected .choose{background:#4E4E4E url(img/images/radioyes.png)no-repeat 97% center;background-size: 5%;}
+        input[type=text]{padding:3.6% 0 2.3% 3%;}
+        .bottom{text-align: center;}
+        .span_hidden{display:none;color: #f00;}
+        #popDiv1{background:#595959;width: 80%;top: 20%;}
+        @media screen and (min-width:310px) and (max-width:375px){p{font-size:15px}}
+        @media screen and (min-width:376px) and (max-width:414px){p{font-size:17px}}
+        @media screen and (min-width:415px) and (max-width:639px){p{font-size:19px}}
+        @media screen and (min-width:640px) and (max-width:719px){p{font-size:23px}}
+        @media screen and (min-width:720px) and (max-width:749px){p{font-size:25px}}
+        @media screen and (min-width:750px) and (max-width:799px){p{font-size:26px}}
+        @media screen and (min-width:800px)and (max-width:1023px){p{font-size:27px}}
+        @media screen and (min-width:1024px)and (max-width:1920px){p{font-size:27px}.btn-bd{margin-bottom:5%}}
+    </style>
+</head>
+<body>
+<div id="container">
+    <div class="middle">
+        <ul>
+            <li class="li_first"><p style="width: 25%;">姓名</p><input type="text" style="width:55%;" class="username" value="<?php echo $username; ?>" maxlength="10" placeholder="请输入您的姓名" onfocus='span_hidden()' ><br></li>
+            <span id="span_username" class='span_hidden'><font size='1'>您输入的姓名有误！</font></span>
+
+            <li><p style="width: 25%;">手机号码</p><input type="text" style="width:55%;"  class="mobile" maxlength="11" value="<?php echo $mobile; ?>" placeholder="请输入手机号码" onfocus='span_hidden()' ><br></li>
+            <span id="span_mobile" class='span_hidden'><font  size='1'>您输入的手机号码不正确！</font></span>
+            <li><p style="width: 30%;">回访时间段</p>
+                <div style="margin-top: 3%;">
+                    <select name="fangtime" class="fangtime" >
+                        <option value="09:00-12:00">09:00-12:00</option>
+                        <option value="12:00-18:00">12:00-18:00</option>
+                    </select>
+                </div>
+            </li>
+            <li><p style="width: 30%;">经销商电话</p><div style="margin-top: 3%;"><?php echo $dealer_tell; ?></div></li>
+
+        </ul>
+        </form>
+    </div>
+    <div class="bottom">
+        <span class="tip"></span>
+        <input type="button" value="提交并领取优惠券" class="btn-bd">
+    </div>
+
+</div>
+<br />
+</body>
+</html>
+<script type="text/javascript">
+
+    function showdiv1(){
+        document.getElementById('popDiv1').style.display='block';
+        document.getElementById('bg').style.display='block';
+    }
+    function closediv(){
+        document.getElementById('bg').style.display='none';
+        document.getElementById('popDiv1').style.display='none';
+    }
+    function bingli(){
+        $(".bingshisele span").each(function() {
+            if ($(this).hasClass("choose")) {
+                $(this).removeClass("choose");
+            }
+            $(".bingshi").css("background-image","url(img/images/up.png)");
+            closediv();
+        });
+    }
+
+    $(function(){
+        loading();
+        $(".bingshi").click(function(){
+            showdiv1();
+            $(".selected").show();
+            $(".bingshi").css("background-image","url(img/images/down.png)");
+        });
+        $(".bingshisele span").click(function(){
+            bingli();
+            $(this).addClass("choose");
+            $(".bingshi").val($(this).text());
+        });
+        //选择性别
+        $(".sex i").click(function(){
+            $(".span_sex").hide();
+            $(".sex i").each(function(){
+                if($(this).hasClass("change")) {
+                    $(this).removeClass("change");
+                }
+            });
+            $(this).addClass("change");
+        });
+        //是否有硬结
+        $(".callous i").click(function(){
+            $(".span_callous").hide();
+            $(".callous i").each(function(){
+                if($(this).hasClass("change")) {
+                    $(this).removeClass("change");
+                }
+            });
+            $(this).addClass("change");
+        });
+        $(".btn-bd").click(function(){
+            //获取表单中的值
+            var username=$(".username").val();
+            var mobile=$(".mobile").val();
+            var fangtime=$(".fangtime").val();
+
+
+
+            //验证
+            var REG_NAMES = /^[\u4e00-\u9fa5a-zA-Z0-9_\.\-\s\·]{1,20}/ ;
+            var REG_MOBILE = /^13[0-9]{1}[0-9]{8}$|15[0-9]{1}[0-9]{8}$|18[0-9]{9}|14[0-9]{1}[0-9]{8}|17[0-9]{1}[0-9]{8}$/
+
+            //验证用户名
+            if(!REG_MOBILE.test(mobile.trim())){
+                $('#span_mobile').show();
+                return false;
+            }
+            //验证用户名
+            if(!REG_NAMES.test(username.trim())){
+                $('#span_username').show();
+                return false;
+            }
+
+
+            showload();
+            $.ajax({
+                url:"<?php echo base_url('customer/doCustomerInsert?open_id='.$open_id.'&doctor_id='.$doctor_id.'&dealer_id='.$dealer_id.'&qc_code='.$qc_code);?>",
+                data:{
+                    username:username,
+                    mobile:mobile,
+                    fangtime:fangtime,
+                },
+                type:'post',
+                cache:false,
+                dataType:'json',
+                success:function(data){
+                    closeload();
+                    if( data.result_code == '200' ){
+                        window.location="<?php echo base_url('customer/showSuccessUser?open_id='.$open_id.'&qc_code='.$qc_code.'&doctor_id='.$doctor_id.'&dealer_id='.$dealer_id);?>";
+                        return false;
+                    }
+                    if( data.result_code == '400' ){
+                        window.location="<?php echo base_url('customer/faild?status="+data.error_msg+"&open_id='.$open_id.'&qc_code='.$qc_code.'&doctor_id='.$doctor_id.'&dealer_id='.$dealer_id);?>";
+                        return false;
+                    }
+                },
+                error : function() {
+                    closeload();
+                    showPopUpDiv();
+                    getAlert({
+                        text:"请检查网络是否畅通",
+                        alert:0
+                    });
+                }
+            });
+        });
+    });
+
+    function span_hidden(){
+        $('.span_hidden').hide();
+    }
+</script>

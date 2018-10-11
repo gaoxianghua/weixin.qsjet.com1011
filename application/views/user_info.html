@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="<?php echo base_url();?>" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" />
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Expires" CONTENT="0"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta http-equiv="x-rim-auto-match" content="none" /> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>个人信息</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/alert.js"></script>
+	<script type="text/javascript" src="js/loading.js"></script>
+	<style>
+p{float:left;padding:3% 0 2.2% 2.2%;width:28.5%;text-align:left}
+.sex{width:81.5%;border:none;padding-top: 3%;margin-bottom: -2%;vertical-align: middle;}
+.type{background: url(img/images/up.png) no-repeat 95%;background-size:5%}
+.bingshi{background: url(img/images/up.png) no-repeat 100%;background-size:4.5%}
+.nan,.nv{margin-left: 5%;color: #333;padding: 0 0% 0 6%;background-size: 50%;}
+.sex .change{background: url(img/images/radioyes.png)no-repeat;background-size: 46%;}
+.selected .span-radio{background: url(img/images/radiono.png) no-repeat 97% center;background-size: 5%;}
+.selected .choose{background:#4E4E4E url(img/images/radioyes.png)no-repeat 97% center;background-size: 5%;}
+.nan{background: url(img/images/radiono.png) no-repeat;}
+.nv{background: url(img/images/radiono.png) no-repeat;}
+input[type=text]{padding:3% 8% 2.4% 3%;}
+.bottom{text-align: center;}
+#popDiv,#popDiv1{background:#595959;width: 80%;top: 20%;}
+.span_hidden{display:none;}
+.vip{
+	margin-top:10px;
+}
+@media screen and (min-width:320px) and (max-width:375px){.yidaosu{width: 36%}.nan,.nv{background-size:50%;}}
+@media screen and (min-width:376px) and (max-width:414px){.yidaosu{width: 36%}.nan,.nv{background-size:50%;}}
+@media screen and (min-width:415px) and (max-width:520px){.nan,.nv{background-size:50%;}.yidaosu{width: 34%}}
+@media screen and (min-width:521px) and (max-width:639px){.nan,.nv{background-size:50%;}.yidaosu{width: 28%}}
+@media screen and (min-width:640px) and (max-width:719px){.nan,.nv{background-size:44%;}.yidaosu{width: 32%}}
+@media screen and (min-width:720px) and (max-width:749px){.yidaosu{width: 33%}}
+@media screen and (min-width:750px) and (max-width:799px){.yidaosu{width: 33%}}
+@media screen and (min-width:800px)and (max-width:1023px){.nan,.nv{background-size:42%;}.yidaosu{width: 29%}}
+@media screen and (min-width:1024px)and (max-width:1920px){.btn-bd{margin-bottom:5%;}.nan,.nv{background-size:43%;}.yidaosu{width: 23%}}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div class="middle">
+			<ul>
+				<li class="li_first"><p>姓名</p><span style="float:right;margin-top:10px;margin-right:10px;"><?php echo isset($userInfo['username'])?$userInfo['username']:'';?></span><br></li>
+				<li><p>性别</p><span style="float:right;margin-top:10px;margin-right:10px;"><?php echo isset($userInfo['gender'])?$userInfo['gender']:'';?></span><br></li>
+				<li><p>手机号码</p><span style="float:right;margin-top:10px;margin-right:10px;"><?php echo isset($userInfo['mobile'])?$userInfo['mobile']:'';?></span><br></li>
+			</ul>	
+		</div>
+		<div class="bottom">
+		</div>
+	</div>
+	<?php
+			if(isset($redirect_url)&&$redirect_url=='register_project'){
+	?>
+			<center><h4 class='vip'><font color="#808080">感谢您注册成为快舒尔会员！</font></h4></center>
+	<?php
+	
+			}else{
+	?>
+			<div id="container">
+				<div class="middle" style="margin-bottom:15%;">
+				<h3>&nbsp;&nbsp;&nbsp;已注册产品</h3><br />
+					<ul>
+						<?php
+							if($userProject&&$userProject!=''){
+						foreach($userProject as $k=>$v){
+				?>
+						<li class="li_first">
+								<p style='width:150px;'><?php echo isset($v['project_type'])?$v['project_type']:'';?></p>
+								<span style="float:right;margin-top:10px;margin-right:10px;">
+								ID：<?php echo isset($v['project_num'])?$v['project_num']:'';?>
+								</span><br></li>
+				<?php
+								}
+					}else{
+				?>
+						无
+				<?php
+					}
+				?>
+					</ul><br/>
+					<?php
+					if(count($data)>0){
+
+					echo "<div class='ex'>";
+
+					echo "<div style='margin: 0 auto;width: 94%;'>&nbsp;&nbsp;&nbsp;&nbsp;您好，您申请的QS-P无针注射器专用便携保护盒已经受理，快递信息如下，请您关注物流动态，注意查收。</div>";
+					echo "<br/>";
+						foreach($data as $value){
+							echo  "<form method='post' action='/product/confrimGoogs'>";
+							echo "<span style='display: block; margin-left: 4%;'>";
+							echo "快递公司：";
+							echo $value['exname'];
+							echo "</span>";
+							echo "<span style='margin-left: 4%;'>";
+							echo "快递单号：";
+							echo $value['exnum'];
+							echo"</span>";
+						$id = $value['eid'];
+					echo "<input type='hidden' name='id' value='$id'>";
+						if(!empty($open_id)){
+						echo "<input type='hidden' name='open_id' value='$open_id'>";
+						}
+
+					echo "<input type='submit' value='确认收货' class='btn-bd'> ";
+						echo "</form>";
+						}
+
+					echo "</div>";
+					}
+
+					?>
+
+				</div>
+
+				<div class="bottom">
+				</div>
+			</div>	
+	<?php		
+			}
+	?>
+	
+	<div class="bottom">
+		<?php
+			if(isset($redirect_url)){
+				if($redirect_url=='register_project'){
+		?>
+					<input type="button" value="注册产品" class="btn-bd" onclick="redirects('register_project')" style='background-color: #1480D1;position:fixed;bottom:5%;right:0;'>	
+		<?php			
+				}
+				if($redirect_url=='success_project'){
+		?>
+					<input type="button" value="完成" class="btn-bd" onclick="redirects('success_project')" style='background-color: #1480D1;position:fixed;bottom:5%;right:0;'>	
+		<?php			
+				}
+		?>
+		<?php
+			}else{
+		?>
+					<input type="button" value="退出" class="btn-bds" onclick="logout()" style='background-color: red;position:fixed;bottom:5%;right:0;'>
+		<?php
+			}
+		?>
+	</div><br />
+		
+</body>
+</html>
+<script>
+$(function(){
+	$('.pr_code_div').hide();
+})
+	loading();
+	function logout(){
+		showload();
+		$.getJSON("<?php echo base_url('login/logOut?open_id='.$open_id);?>",function(data){
+			//一般登录成功
+			showPopUpDiv();
+			if( data.result_code == '200' ){
+				showPopUpDiv();
+				getAlert({
+				    text:'退出成功',  
+				    alert:1	     	 
+				},data.info)
+				closeload();
+				return false;
+			}
+			//登录失败
+			if( data.result_code == '400' ){
+				showPopUpDiv();
+				getAlert({
+				    text:data.error_msg,  //文本可修改，可加参数
+				    alert:0	     	  //参数可修改 0,1,2
+				})
+				closeload();
+				return false;
+			}
+ 		})
+	}
+	
+	function redirects(redir){
+		if(redir == 'register_project'){
+			location.href="<?php echo base_url('register_project?token='.$token);?>";
+		}
+		if(redir == 'success_project'){
+			location.href="<?php echo base_url('product?token='.$token);?>";
+		}
+	}
+	
+</script>

@@ -1,0 +1,48 @@
+/*第一个样式可以去掉，只是为了方便预览*/
+.userInfo{
+	margin: 0 auto;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	border: 1px solid #ccd1d9;
+	padding: 20px;
+}
+div,p,input,img,span{
+	margin: 0;
+	padding: 0;
+}
+.fl{float: left;}
+.fr{float: right;}
+.cb{clear: both;}
+.br{clear: both;}
+.img-upload{width: 200px;font-size: 15px;color: #4C4C4C;}
+.img-box{width: 120px;height: 120px;position: relative;text-align: center;}
+.img-input{opacity: 0;position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
+.img-detail{display: none;width: 100%;height: 100%;}
+.head-td{height: 100px !important;}
+.hint-tit{text-align: center;font-size: 14px;margin-top: 20px;margin-bottom: 30px;}
+.input-box{width: 100%;}
+.input-style{height: 35px;line-height: 35px;outline: none;width:450px;font-size: 14px;border: 1px solid #e4e4e4;text-indent: 15px;}
+.vertical-bar{width: 3px;height: 30px;background-color: #0066CC;float: left;margin-right: 5px;}
+.doc-tit{margin-bottom: 20px;}
+.doc-tit-detail{font-size: 20px;}
+.left-tit{margin-right: 20px;}
+.info-item{margin-top: 20px;}
+.mt-30{margin-top: 30px;}
+.sure-btn{margin-right: 15px;}
+/*添加管理员样式*/
+.info-list li{list-style: none; margin-bottom: 20px;}
+/*地址联动*/
+.table-li{font-size: 12px; color: #4c4c4c; height: 30px; line-height: 30px;}
+.table-li span{float: left;display: inline-block;line-height: 30px;}
+.label-txt{border: none;outline: none;height: 100%;width: 96%;}
+.checkbox-txt{width: 136px; height: 30px;border: 1px solid #e4e4e4; line-height: 30px; text-indent: 5px; position: relative; cursor: pointer; margin-right: 20px;}
+.checkbox-txt>ul{display: none; position: absolute; left: -1px; top: 28px; height: 100px; overflow-y: auto; overflow-x: hidden;padding: 0 !important;z-index: 1000;}
+.checkbox-txt>ul>li{height: 25px; width: 136px; border: 1px solid #e4e4e4; border-top: 0; margin-bottom: 0 !important; background-color: #fff;}
+.checkbox-txt>ul>li:first-child{border-top: 1px solid #e4e4e4;}
+.checkbox-txt>ul>li:hover{background-color: #ccc;}
+.input{width: 310px; height: 100%; border: 1px solid #e4e4e4; text-indent: 5px; color: #4c4c4c;}
+.addr-hint{color: red;font-size: 20px;margin-top: 6px;margin-right: 5px;}
+.pull-down{position: absolute; right: 6px; top: 12px;width: 10px !important;}
+/*地图*/
+.pr{position: relative;}
+.map-container{width: 100%;height: 300px;}

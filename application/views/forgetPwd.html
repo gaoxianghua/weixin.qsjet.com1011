@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="<?php echo base_url();?>" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" />
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Expires" CONTENT="0"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta http-equiv="x-rim-auto-match" content="none" /> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>找回密码</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/alert.js"></script>
+	<script type="text/javascript" src="js/loading.js"></script>
+	<style>
+p{float:left;padding:3% 0 2.2% 2.2%;width:17.5%;text-align:left}
+input[type=text]{padding:3% 0% 2.4% 3%;width:80%;}
+input[type=password]{padding:3% 0% 2.4% 3%;width:80%;}
+.span_hidden{display:none;}
+.btn-bd{margin-top: 10%;}
+.yzm_btn{border: none;outline: none; border-radius: 4px;background:#1480D1;color: #fff;height: 25px;width:25%;margin:1.5%;line-height: 5px;font-size: 1rem}
+#popDiv,#popDiv1{background:#595959;width: 80%;top: 20%;}
+	</style>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+	<div id="container">
+		<div class="middle">
+			<ul>
+				<li class="li_first"><p>账号</p><input type="text" class="account" name="account" placeholder="请输入您的手机号码" onfocus='span_hidden()' /><br></li>
+				<span id="span_account" class='span_hidden'><font color='red' size='1'>手机号码输入有误！</font></span>
+				<li class="li_last"><p>验证码</p><input type="text" style="width: 50%" class="code" placeholder="请输入您的验证码" onfocus='span_hidden()' /><input type="button" value='获取验证码' class="yzm_btn btn-bd" /><br></li>
+				<span id="span_code" class='span_hidden'><font color='red' size='1'>验证码输入有误！</font></span>
+			</ul>	
+			</form>
+		</div>
+		<div class="bottom">
+			<input type="button" value="提交" class="btn-bd btn-tj">	
+		</div>
+	</div>
+</body>
+</html>
+<script>
+loading();
+var open_id = "<?php echo isset($open_id)?'open_id='.$open_id:'';?>";
+var countdown=60; 
+function settime(obj) { 
+    if (countdown == 0) { 
+        obj.removeAttribute("disabled");    
+        obj.value="获取验证码"; 
+        countdown = 60; 
+        return;
+    } else { 
+        obj.setAttribute("disabled", true); 
+        obj.value="重新发送(" + countdown + ")"; 
+        countdown--; 
+    } 
+
+	 t=setTimeout(function(){ settime(obj)},1000)} 
+$(".yzm_btn").click(function() {
+	var account=$(".account").val();
+	var REG_MOBILE = /^13[0-9]{1}[0-9]{8}$|15[0-9]{1}[0-9]{8}$|18[0-9]{9}|147[0-9]{8}|17[07]{1}[0-9]{8}$/;
+	if(!REG_MOBILE.test(account)){
+		$('#span_account').show();
+		return false;
+	}
+	settime(this);
+	showload();
+	if(open_id != ''){
+		var commit_forget_url = "<?php echo base_url('login/forgetSendCode?');?>"+open_id;
+	}else{
+		var commit_forget_url = "<?php echo base_url('login/forgetSendCode');?>";
+	}
+	$.ajax({  
+		url:commit_forget_url, 
+			data:{account:account},  
+			type:'get',  
+			cache:false,  
+			dataType:'json',  
+			success:function(data){
+				closeload();
+				if( data.result_code == '200' ){
+					showPopUpDiv();
+					getAlert({
+					    text:data.info,  
+					    alert:0	     	 
+					})
+					return false;
+				}
+				if( data.result_code == '400' ){
+					clearTimeout(t);
+					$(".yzm_btn").removeAttr("disabled");
+					countdown=60;
+					 $(".yzm_btn").val("获取验证码");
+					showPopUpDiv();
+					getAlert({
+					    text:data.error_msg,  
+					    alert:0	     	
+					})
+					return false;
+				}
+	 		}, 
+	    	error : function() {  
+				closeload();
+	 		}  
+		});	
+});
+$(".btn-tj").click(function(){
+	var account=$(".account").val();
+	var code=$(".code").val();
+	var REG_MOBILE = /^13[0-9]{1}[0-9]{8}$|15[0-9]{1}[0-9]{8}$|18[0-9]{9}|147[0-9]{8}|17[07]{1}[0-9]{8}$/;
+	var REG_PASSWORD = /^[0-9A-Za-z_\.\+\-\!\@\#\$\%\^\&\*]{6,15}$/;
+	var REG_CODE = /^\d{4}$/;
+	if(!REG_MOBILE.test(account)){
+		$('#span_account').show();
+		return false;
+	}
+	if(!REG_CODE.test(code)){
+		$('#span_code').show();
+		return false;
+	}
+	showload();
+	if(open_id != ''){
+		var commit_url = "<?php echo base_url('login/doForget?open_id='.$open_id);?>";
+	}else{
+		var commit_url = "<?php echo base_url('login/doForget');?>";
+	}
+	$.ajax({  
+		url:commit_url, 
+			data:{  
+				account:account,
+				code:code,
+	 	  		},  
+			type:'get',  
+			cache:false,  
+			dataType:'json',  
+			success:function(data){
+				closeload();
+				if( data.result_code == '200' ){
+					showPopUpDiv();
+					getAlert({
+					    text:'验证通过，请重新设置密码',  
+					    alert:1	     	 
+					},data.url)
+					return false;
+				}
+				if( data.result_code == '400' ){
+					showPopUpDiv();
+					getAlert({
+					    text:data.error_msg,  
+					    alert:0	     	
+					});
+					return false;
+				}
+	 		}, 
+	    	error : function() {  
+				closeload();
+				showPopUpDiv();
+     			getAlert({
+     				text:"请检查网络是否畅通",  
+     				alert:0	    	  
+     			});
+	 		}  
+		});	
+})
+
+function span_hidden(){
+	$('.span_hidden').hide();
+}
+
+</script>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="<?php echo base_url();?>" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" /> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta http-equiv="x-rim-auto-match" content="none" />
+  	<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Expires" CONTENT="0"> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>创建21天卡</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<link href="css/mobiscroll.css" rel="stylesheet" type="text/css">
+	<script src="js/jquery.1.7.2.min.js"></script>
+    <script src="js/mobiscroll_002.js" type="text/javascript"></script>
+	<script src="js/mobiscroll_004.js" type="text/javascript"></script>
+	<script src="js/mobiscroll.js" type="text/javascript"></script>
+	<script src="js/mobiscroll_003.js" type="text/javascript"></script>
+	<script src="js/mobiscroll_005.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/alert.js"></script>
+	<script type="text/javascript" src="js/loading.js"></script>
+	<style type="text/css">
+		.create-margin{margin-top: 3%;}
+		li{padding: 4% 3%;}
+		a{margin:2%;font-size: 1.3rem;}
+		a:link,a:visited{color: #000;text-decoration: none;}
+		span{float:right;color: #D0D0D0;font-weight: bold;font-size: 1.2rem;}
+		.nei_span{font-weight:normal}
+		.dwbw span{float: none;}
+		input[type=text]{font-size:1.2rem;float: none;padding: 0;color: #D0D0D0;text-align: right;width:auto;font-family: "微软雅黑";}
+	</style>
+	<script type="text/javascript">
+        $(function () {
+        	loading();
+			var currYear = (new Date()).getFullYear();	
+			var opt={};
+			opt.date = {preset : 'date'};
+			opt.datetime = {preset : 'datetime'};
+			opt.time = {preset : 'time'};
+			opt.default = {
+				theme: 'android-ics light', //皮肤样式
+		        display: 'modal', //显示方式 
+		        mode: 'scroller', //日期选择模式
+				dateFormat: 'yyyy-mm-dd',
+				lang: 'zh',
+				showNow: true,
+				nowText: "今天",
+		        startYear: currYear - 10, //开始年份
+		        endYear: currYear + 10 //结束年份
+			};
+		  	$("#appDate").mobiscroll($.extend(opt['date'], opt['default']));
+			$(".datetext").change(function(){
+				var str=$(".datetext").val()
+				str1=str.replace(/-/g, '/');
+				var date = new Date(str1);
+				date.setTime(date.getTime()+20*24*60*60*1000);
+				dateYear=date.getFullYear();
+				dateMonth=date.getMonth()+1;
+				dateDate=date.getDate();
+				if(dateMonth<10){
+					dateMonth="0"+dateMonth;
+				}
+				if(dateDate<10){
+					dateDate="0"+dateDate;
+				}
+				$(".enddate").html(dateYear+'-'+dateMonth+'-'+dateDate);
+				
+			});
+		$(".btn-bd").click(function(){
+			if($(".datetext").val()=="请选择起始日期  >"){
+				alert("请选择起始日期");
+				return false;
+			}
+			var start_time=$(".datetext").val();
+			var end_time=$(".enddate").html();
+			showload();
+			$.ajax({  
+     		 	url:'days_card/doInsertCards?open_id=<?php echo $open_id;?>', 
+      			data:{  
+              		  start_time : start_time,  
+              		  end_time : end_time
+     		 	  	},  
+     			type:'post',  
+     			cache:false,  
+     			dataType:'json',  
+     			success:function(data){
+     				closeload();
+     				if( data.result_code == 200 ){
+     					window.location="days_card?open_id=<?php echo $open_id;?>";
+     				}
+     				if( data.result_code == 400 ){
+     					showPopUpDiv();
+						getAlert({
+							text:data.error_msg,
+							alert:0
+						})
+     				}
+     		 	},  
+      		    error : function() { 
+      		    	closeload(); 
+          			showPopUpDiv();
+						getAlert({
+							text:"创建失败1",
+							alert:0
+						})
+      		 	}  
+ 			});	
+		});
+				
+        });
+    </script>
+	</head>
+	<body>
+		<div id="container">
+			<div class="create-margin">
+				<ul>
+					<li class="li_first"><a>开始日期<span class="nei_span stardate"><input value="请选择起始日期  >" class="datetext" readonly="readonly" name="appDate" id="appDate" type="text"></span></a></li>
+					<li class="li_last"><a>结束日期<span class="nei_span enddate">根据开始日期自动结算</span></a></li>
+				</ul>
+				<input type="button" value="创建" class="btn-bd" style="margin-top: 10%;">
+			</div>
+		</div>
+	</body>
+</html>

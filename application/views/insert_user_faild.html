@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<base href="<?php echo base_url();?>" />	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" /> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta http-equiv="x-rim-auto-match" content="none" /> 
+  	<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Expires" CONTENT="0"> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<title>失败</title>
+	<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<div class="submit">
+			<img src="img/images/faild.png" alt="提交失败" />
+			<p>失败</p>
+		</div>
+		<div class="cause">
+			<p>失败原因：<?php echo isset($error_msg)?$error_msg:'信息不完善';?></p>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	window.onload=function(){
+		setTimeout(function(){
+			WeixinJSBridge.call('closeWindow');
+		},3000);
+	}
+</script>

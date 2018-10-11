@@ -1,0 +1,36 @@
+a:hover{text-decoration: none;}
+/*分割线*/
+.line{width: 100%;height: 1px;background-color: #F0F0F0;}
+/*白色背景圆角*/
+.radius-8{background-color: #ffffff;-webkit-border-radius: 8px;-moz-border-radius: 8px;border-radius: 8px;}
+/*橘色背景按钮*/
+.orange-btn{height: 1.75rem;line-height: 1.75rem;text-align: center;font-size: 0.8rem;color: #FFFFFF;margin: auto 0.5rem;background-color: #FD7B3D;border-radius: 3px;margin-bottom: 2rem;}
+.orange-btn:hover{background-color:#fd553d;}
+.mar8{margin: 0.4rem;}
+
+.padding-16{padding: 0.8rem;}
+.addr-item{padding: 0 0.8rem 0.8rem 0.8rem;margin-top: 0.5rem;}
+.gander{margin: 0 0.5rem;}
+.addr-left-bottom{margin-top: 0.5rem;}
+.check-img{width: 0.8rem;margin-top: 0.5rem;}
+.addr-edit{height: 2.0rem;border-bottom: 1px solid #F0F0F0;margin-bottom:0.5rem;}
+.edit-item{line-height: 2rem;}
+.check-icon{width: 0.8rem;margin-right: 0.1rem;}
+.mar-r{margin-right: 1.5rem;}
+
+.area-list{font-size: 0.7rem;color: #1a1a22;}
+.area-list li{width: 100%;height: 2.35rem;line-height: 2.35rem;text-indent: 0rem;text-align: center;}
+.right-list{background-color: #f4f4f4;width:50%;margin-left:10%;}
+.left-list{background-color: #FFFFFF;width: 100px;}
+.selected-li{background-color: #f4f4f4;}
+.mt-30{margin-top: 1.5rem;}
+.addr-server{display: inline-block;width: 100%; }
+/*普通弹窗*/
+.alert-box{display: none;position: fixed;top: 0;left: 0;background-color: #f0f0f0;z-index: 100;}
+.normal-box{background-color: rgba(0,0,0,0.3) !important;}
+.alert-main,.finished-main,.star-main{width: 10rem;margin: 0 auto;background-color: #ffffff;border-radius: 8px;} 
+.alert-text{font-size: 0.7rem;color: #999999;padding-top: 1.5rem;}
+.alert-btn{width: 100%;height: 1.75rem;line-height: 1.75rem;text-align: center;font-size: 0.7rem;color: #FFFFFF;margin: 0 auto;margin-top: 1.5rem;background-color: #FD7B3D;border-bottom-left-radius: 8px;border-bottom-right-radius: 9px;}
+.no-data{font-size: 0.7rem;color: #999999;margin-top: 2.0rem;text-align: center;}
+.btn-detail{width: 4.975rem;}
+.left-btn{border-right: 1px solid #FFFFFF;}

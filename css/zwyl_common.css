@@ -1,0 +1,67 @@
+/*文字排版*/
+.t1{text-indent: 1em;}
+.t2{text-indent: 2em;}
+.unl{text-decoration: underline;}
+.no-unl{text-decoration: none;}
+
+/*定位*/
+.tl{text-align: left;}
+.tr{text-align: right;}
+.tc{text-align: center;}
+.fl{float: left;}
+.fr{float: right;}
+.cb{clear: both;}
+.cl{clear:left}
+.cr{clear: right;}
+.pr{position: relative;}
+.pa{position: absolute;}
+.zoom{zoom: 1;}
+.none{display: none;}
+.block{display: block;}
+.inblock{display: inline-block;}
+
+/*宽度*/
+.w{width: 100%;}
+.h{height: 100%;}
+
+/*边距*/
+.mar-auto{margin: 0 auto;}
+
+/*body*/
+body{font-family:"microsoft yahei",serif;background-color: #f0f0f0;}
+html,body {font-size: 20px;}
+.f14-4c{font-size: 0.7rem;color: #4c4c4c;}
+.f14-999{font-size: 0.7rem;color: #999999;}
+.f14-4d{font-size: 0.7rem;color: #4D4D4D;}
+.f14-fd{font-size: 0.7rem;color: #FD7B3D;}
+.f12-4c{font-size: 0.6rem;color: #4C4C4C;}
+.f12-fd{font-size: 0.6rem;color: #fd7b3d;}
+.f12-999{font-size: 0.6rem;color: #999999;}
+/*footer*/
+footer{z-index: 90;position: fixed;left: 0;bottom: 0;width: 100%;height: 1.8rem;line-height: 1.8rem;font-size: 0.7rem;color: #4C4C4C;background-color: #F7F7F7;border: 1px solid #CCCCCC;-moz-box-shadow: 0 -1px 7px rgba(0,0,0,0.3);-webkit-box-shadow:  0 -1px 7px rgba(0,0,0,0.3);box-shadow: 0 -1px 7px rgba(0,0,0,0.3);}
+
+.foot-item{text-align: center;border-left: 1px solid#dbdbdb;float: left;}
+.foot-item:first-child{border: none;}
+.foot-item a{text-decoration: none !important;font-size: 0.7rem !important;color: #4C4C4C;}
+.curr-item{color: #FD7B3D !important;}
+.foot-item a:hover{text-decoration: none !important;}
+
+#returnBtn{margin-top: 0.5rem !important;}
+.marb0{margin-bottom: 0 !important;}
+.bootom-btn{text-align: center;font-size: 0.7rem;color: #FFFFFF;height: 1.7rem;line-height: 1.7rem;background-color: #FD7B3D;margin-bottom: 1.5rem;margin-top: 1rem;border-radius: 0.25rem;}
+/*加载等待*/
+.loader{ width: 100%; text-align: center; margin: 3.5rem 0;}
+.loader span{display:inline-block !important;vertical-align:middle;width:0.4rem;height:0.4rem;background:#00A0FF;border-radius:50%;margin:0 1px;animation:loader 1s infinite alternate;animation:loader 1s infinite alternate}
+.loader span:nth-of-type(2){animation-delay:.2s;animation-delay:.2s}
+.loader span:nth-of-type(3){animation-delay:.4s;animation-delay:.4s}
+.loader span:nth-of-type(4){animation-delay:.6s;animation-delay:.6s}
+.loader span:nth-of-type(5){animation-delay:.8s;animation-delay:.8s}
+.loaderSkinOrange span{ background: #FD7B3D;}
+.loaderSkinBlue span{ background: #01aaef ;}
+.loaderSkinBlack span{ background: #111111 ;}
+@keyframes loader{0%{opacity:1}
+100%{opacity:.1}
+}
+@keyframes loader{0%{opacity:1}
+100%{opacity:.1}
+}

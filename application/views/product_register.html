@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>欢迎选用快舒尔产品</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" href="css/welcome.css"/>
+</head>
+<style type="text/css">
+    .wrapper .align-center{
+        margin:0 auto;
+        width:auto;
+        text-align:center;
+    }
+    .wrapper .product{
+        margin:0 auto;
+        width:auto;
+        text-align:center;
+    }
+    .wrapper .ad{
+        margin:10% 0 10% 5% ;
+    }
+</style>
+<body>
+    <div class="wrapper">
+        <!---观看产品使用视频-->
+        <div class="align-center">
+            <a href="<?php echo base_url('product/player');?>">
+                <img style="width: 320px;height: auto; margin-top: 10%;" src="img/images/video2x.png" />
+            </a>
+        </div>
+        <!---产品注册-->
+        <div class="product">
+            <a href="<?php echo $redirect?$redirect:'register_project';?>">
+                <img style="width: 320px;height: auto; margin-top: 4%;" src="img/images/regpro2x.png" />
+            </a>
+        </div>
+        <!---AD--->
+    </div>
+
+
+</body>
+</html>

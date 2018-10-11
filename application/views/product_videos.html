@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>产品使用视频</title>
+    <base href="<?php echo base_url();?>">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link rel="stylesheet" href="css/welcome.css"/>
+    <style type="text/css">
+        .wrappers .align-center{
+            margin:0 auto;
+            width:auto;
+            text-align:center;
+        }
+        .wrappers .title{
+            margin:0 auto;
+            width:auto;
+            text-align:center;
+        }
+        .wrappers .product{
+            margin:0 auto;
+            width:auto;
+            text-align:center;
+        }
+        .wrappers .ad{
+            margin:10% 0 10% 5% ;
+        }
+        body{background-color: #efefef}
+    </style>
+</head>
+<body>
+    <div class="wrappers">
+        <!--title-->
+        <div class="title" style="margin-top: 6%;text-align:center;">
+            <font size="4" style="text-align:center;">欢迎您选用快舒尔产品</font>
+        </div>
+        <!---M-->
+        <div class="product">
+            <a href="https://m.youku.com/video/id_XMzMwNTc4MTMxNg==.html?spm=a2h0k.8191393.bodydiv.5%212~5%214~A&from=s7.8-1.2&source=http%3A%2F%2Fwww.soku.com%2Fm%2Fy%2Fvideo%3Fq%3D%25E5%25BF%25AB%25E8%2588%2592%25E5%25B0%2594%25E6%2597%25A0%25E9%2592%2588%26f%3D1%26kb%3D140200000000000__%25E5%25BF%25AB%25E8%2588%2592%25E5%25B0%2594%25E6%2597%25A0%25E9%2592%2588%26_rp%3D1524129144724QgNl6a&ishttps=1">
+                <img style="width: 320px;height: auto; margin-top: 4%;" src="img/images/qsm2x.png" />
+            </a>
+        </div>
+        <!---P-->
+        <div class="align-center">
+            <a href="https://v.youku.com/v_show/id_XMzc1OTg0NDc0MA==.html?spm=a2h3j.8428770.3416059.1">
+                <img style="width: 320px;height: auto; margin-top: 6%;" src="img/images/qsp2x.jpg" />
+            </a>
+        </div>
+
+    </div>
+<script src="js/jquery.1.7.2.min.js"></script>
+<script>
+    function rems(){
+        var html = document.documentElement;
+        var wid = html.clientWidth;
+        var fz = wid / 320 * 100 +'px';
+        html.style.fontSize = fz;
+    }
+    rems();
+    window.addEventListener('resize',rems,false);
+</script>
+</body>
+</html>

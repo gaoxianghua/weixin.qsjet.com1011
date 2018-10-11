@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> 
+	<meta name="format-detection" content="telephone=no" /> 
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
+	<META HTTP-EQUIV="Expires" CONTENT="0"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  	<meta http-equiv="x-rim-auto-match" content="none" /> 
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>录入</title>
+	<link rel="stylesheet" href="../css/style.css" />
+	<script type="text/javascript" src="../js/jquery.1.7.2.min.js"></script>
+	<script type="text/javascript" src="../js/alert.js"></script>
+	<style type="text/css">
+		.create-margin{margin-top: 3%;}
+		.create-margin ul{margin-top: 5%;}
+		.content2 ul,.content3 ul{display: none;}
+		#wan{border:none;width: 33.4%;}
+		.span_hidden{display:none;}
+		.mae .active0{color: #fff;background:#1480d1;border-top-left-radius: 6px;border-bottom-left-radius: 6px;}
+		.mae .active1{color: #fff;background:#1480d1;}
+		.mae .active2{color: #fff;background:#1480d1;border-top-right-radius: 6px;border-bottom-right-radius: 6px;}
+		.mae{width: 96%;background: #fff;margin: 0 auto;border-radius: 6px;}
+		.mae span{color:#333;width: 33%;float: none;text-align: center;margin:0;display: inline-block;padding: 3% 0;border-right: 1px solid #d6d6d6;cursor: pointer;}
+		li{padding: 3% 2%;}
+		input[type=text]{font-size:1rem;float:none;outline:0;padding:3% 1% 2.4% 1%;width:66%;border:none}
+		a{margin:2%;font-size: 1.3rem;}
+		a:link,a:visited{color: #000;text-decoration: none;}
+		span{float:right;margin-right: 10px;color: #D0D0D0;font-weight: bold;font-size: 1.2rem;}
+		.nei_span{font-weight:normal}
+		@media screen and (min-width:800px)and (max-width:1023px){#wan{border:none;width: 33.6%;}}
+		@media screen and (min-width:1024px)and (max-width:1920px){#wan{border:none;width: 33.8%;}}
+	</style>
+	</head>
+	<body>
+		<div id="container">
+			<div class="create-margin" id="content">
+				<div class="mae" id="mae"><span onclick="setTab(0)" class="active0">早</span><span onclick="setTab(1)">中</span><span onclick="setTab(2)" id="wan">晚</span></div>
+				<div class="content1">
+					<ul>
+						<li class="li_first"><a>血糖-早：</a><input type="text" class="sugar_morning"  onfocus='span_hidden()' placeholder="请输入血糖,5-21之间"  ><br />
+						<span id="span_sugar_morning" class='span_hidden'><font color='red' size='2'>血糖输入有误！</font></span>
+						</li>
+						<li class="li_last"><a>注射剂量-早：</a><input type="text" style="width: 55.5%;" onfocus='span_hidden()' class="pressure_morning" placeholder="请输入注射剂量,3-30之间"  />
+						<span id="span_pressure_morning" class='span_hidden'><font color='red' size='2'>注射剂量输入有误！</font></span>
+						</li>
+					</ul>
+				</div>
+				<div class="content2">
+					<ul>
+						<li class="li_first"><a>血糖-中：</a><input type="text" class="sugar_noon" onfocus='span_hidden()' placeholder="请输入血糖,5-21之间" >
+						<span id="span_sugar_noon" class='span_hidden'><font color='red' size='2'>血糖输入有误！</font></span>
+						</li>
+						<li class="li_last"><a>注射剂量-中：</a><input type="text" class="pressure_noon" onfocus='span_hidden()' style="width: 55.5%;" placeholder="请输入注射剂量,3-30之间"  />
+						<span id="span_pressure_noon" class='span_hidden'><font color='red' size='2'>注射剂量输入有误！</font></span>
+						</li>
+					</ul>
+				</div>
+				<div class="content3">
+					<ul>
+						<li class="li_first"><a>血糖-晚：</a><input type="text" class="sugar_night" onfocus='span_hidden()' placeholder="请输入血糖,5-21之间"  >
+						<span id="span_sugar_night" class='span_hidden'><font color='red' size='2'>血糖输入有误！</font></span>
+						</li>
+						<li class="li_last"><a>注射剂量-晚：</a><input type="text" class="pressure_night" onfocus='span_hidden()' style="width: 55.5%;" placeholder="请输入注射剂量,3-30之间"  />
+						<span id="span_pressure_night" class='span_hidden'><font color='red' size='2'>注射剂量输入有误！</font></span>
+						</li>
+					</ul>
+				</div>
+				<input type="button" value="保存" class="btn-bd" style="margin-top: 10%;">
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+		var open_id = "<?php echo $open_id;?>";
+		function setTab(n){
+			var span=document.getElementById("mae").getElementsByTagName("span");
+			var content=document.getElementById("content").getElementsByTagName("ul");
+ 			 for(i=0;i<span.length;i++){
+  				span[i].className=i==n?"active"+i:"";
+  				content[i].style.display=i==n?"block":"none";
+ 			}
+		}
+		function loading(){
+			$("body").append('<div id="background" class="background" style="display:none;"></div><div id="loadingdiv" class="loadingdiv" style="display:none;"><img src="../img/images/loading.gif"></div>');
+		}
+		function showload(){
+		    document.getElementById('loadingdiv').style.display='block';
+		    document.getElementById('background').style.display='block';
+		}
+		function closeload(){
+		    document.getElementById('background').style.display='none';
+		    document.getElementById('loadingdiv').style.display='none';
+		}
+		$(function(){
+			loading();
+			var id = "<?php echo isset($id)?$id:'';?>";
+			$(".btn-bd").click(function(){
+			var date=new Date();
+			var days_time;
+			dateYear=date.getFullYear();
+			dateMonth=date.getMonth()+1;
+			dateDate=date.getDate();
+			days_time=dateYear+'-'+dateMonth+'-'+dateDate;
+			var sugar_morning=$(".sugar_morning").val();
+			var sugar_noon=$(".sugar_noon").val();
+			var sugar_night=$(".sugar_night").val()
+			var pressure_morning=$(".pressure_morning").val();
+			var pressure_noon=$(".pressure_noon").val();
+			var pressure_night=$(".pressure_night").val();
+			var span_tab=$(".mae span");
+			if(span_tab[0].className=="active0"){
+				if(! /^[\d]+$/.test(sugar_morning)){
+					$('#span_sugar_morning').show();
+					return false;
+				}
+				
+				if( sugar_morning <5 || sugar_morning >21 ){
+					$('#span_sugar_morning').show();
+					return false;
+				}
+				
+				if(! /^[\d]+$/.test(pressure_morning)){
+					$('#span_pressure_morning').show();
+					return false;
+				}
+				if( pressure_morning <3 || pressure_morning >30 ){
+					$('#span_pressure_morning').show();
+					return false;
+				}
+				showload();
+				$.ajax({  
+     			 	url:"<?php echo base_url('days_card/doInsertDataCards?open_id='.$open_id.'&id=');?>"+id, 
+      				data:{  
+        				sugar_morning:sugar_morning,
+        				pressure_morning:pressure_morning
+     		 	  		},  
+     				type:'post',  
+     				cache:false,  
+     				dataType:'json',  
+     				success:function(data){
+     					closeload();
+     					if( data.result_code == 200  ){
+     						showPopUpDiv();
+    						getAlert({
+    							text:data.info,
+    							alert:1,
+    						},"<?php echo base_url('days_card?open_id='.$open_id)?>")
+     					}
+     					if( data.result_code == 400  ){
+     						showPopUpDiv();
+    						getAlert({
+    							text:data.error_msg,
+    							alert:0,
+    						})
+     					}
+     		 		},
+      		    	error : function(data) {  
+      		    		closeload();
+	          			showPopUpDiv();
+						getAlert({
+							text:"保存失败",
+							alert:0,
+						})
+	      		 	}  
+	 			});	
+			}else if(span_tab[1].className=="active1"){
+				
+				if(! /^[\d]+$/.test(sugar_noon)){
+					$('#span_sugar_noon').show();
+					return false;
+				}
+				
+				if( sugar_noon <5 || sugar_noon >21 ){
+					$('#span_sugar_noon').show();
+					return false;
+				}
+				
+				if(! /^[\d]+$/.test(pressure_noon)){
+					$('#span_pressure_noon').show();
+					return false;
+				}
+				if( pressure_noon <3 || pressure_noon >30 ){
+					$('#span_pressure_noon').show();
+					return false;
+				}
+				showload();
+				$.ajax({  
+     			 	url:"<?php echo base_url('days_card/doInsertDataCards?open_id='.$open_id.'&id=');?>"+id,
+      				data:{  
+        				sugar_noon:sugar_noon,
+        				pressure_noon:pressure_noon
+     		 	  		},  
+     				type:'post',  
+     				cache:false,  
+     				dataType:'json',  
+     				success:function(data){
+     					closeload();
+     					if( data.result_code == 200  ){
+     						showPopUpDiv();
+    						getAlert({
+    							text:data.info,
+    							alert:1,
+    						},"<?php echo base_url('days_card?open_id='.$open_id)?>")
+     					}
+     					if( data.result_code == 400  ){
+     						showPopUpDiv();
+    						getAlert({
+    							text:data.error_msg,
+    							alert:0,
+    						})
+     					}
+     		    		
+     		 		},
+      		    	error : function(data) { 
+      		    		closeload();
+	          			showPopUpDiv();
+						getAlert({
+							text:"保存失败",
+							alert:0
+						})
+	      		 	}  
+	 			});
+			}else if(span_tab[2].className=="active2"){
+				if(! /^[\d]+$/.test(sugar_night)){
+					$('#span_sugar_night').show();
+					return false;
+				}
+				
+				if( sugar_night <5 || sugar_night >21 ){
+					$('#span_sugar_night').show();
+					return false;
+				}
+				
+				if(! /^[\d]+$/.test(pressure_night)){
+					$('#span_pressure_night').show();
+					return false;
+				}
+				if( pressure_night <3 || pressure_night >30 ){
+					$('#span_pressure_night').show();
+					return false;
+				}
+				showload();
+				$.ajax({  
+     			 	url:"<?php echo base_url('days_card/doInsertDataCards?open_id='.$open_id.'&id=');?>"+id,
+      				data:{  
+        				sugar_night:sugar_night,
+        				pressure_night:pressure_night
+     		 	  		},  
+     				type:'post',  
+     				cache:false,  
+     				dataType:'json',  
+     				success:function(data){
+     					closeload();
+     					if( data.result_code == 200  ){
+     						showPopUpDiv();
+    						getAlert({
+    							text:data.info,
+    							alert:1,
+    						},"<?php echo base_url('days_card?open_id='.$open_id)?>")
+     					}
+     					if( data.result_code == 400  ){
+     						showPopUpDiv();
+    						getAlert({
+    							text:data.error_msg,
+    							alert:0,
+    						})
+     					}
+     		 		},
+      		    	error : function(data) {  
+      		    		closeload();
+	          			showPopUpDiv();
+						getAlert({
+							text:"保存失败",
+							alert:0
+						})
+	      		 	}  
+	 			});
+			}
+
+			});
+		});
+		function span_hidden(){
+			$('.span_hidden').hide();
+		}
+	</script>

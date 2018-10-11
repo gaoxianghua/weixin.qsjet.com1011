@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="<?php echo base_url();?>" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="x-rim-auto-match" content="none" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>请输入验证码</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/alert.js"></script>
+    <script type="text/javascript" src="js/loading.js"></script>
+    <script src="js/city.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <style>
+        p{float:left;padding:3% 0 2.2% 2.2%;width:12.5%;text-align:left}
+        input[type=text]{padding:3% 8% 2.4% 3%;}
+        input[type=password]{padding:3% 8% 2.4% 3%;}
+        .span_hidden{display:none;}
+        #popDiv,#popDiv1{background:#595959;width: 80%;top: 20%;}
+        .btn-bd{margin-top: 10%;}
+        .bottom a{display: inline-block;margin-top: 3%;}
+        .forgetPw{margin-left: 3%;}
+        .register{float: right;margin-right: 3%;color: rgb(11, 142, 241)}
+    </style>
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+<div id="container">
+    <form method="post" action="/cmef/checknum">
+        <div class="middle">
+            <ul>
+                <li class="li_first"><p style="width:20%">验证码</p><input style="width:70%" type="text" id="inputAId"  name="code" placeholder="请输入验证码"/><font color="red">*</font><br></li>
+
+            </ul>
+            <br/>
+            <input type="hidden" name ="openid" value="<?php echo $openid; ?>">
+            <div style="float: right;margin-right: 40%"><input type="submit" value="确认" class="btn-bd"  style="width: 120px;"/></div>
+        </div>
+    </form>
+
+</div>
+</body>
+
+</html>
